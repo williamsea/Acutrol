@@ -1,0 +1,10 @@
+c:\users\vnel\documents\visual studio 2013\Projects\Acutrol\Acutrol\bin\Debug\Acutrol.exe.config
+C:\Users\VNEL\Documents\Visual Studio 2013\Projects\Acutrol\Acutrol\bin\Debug\Acutrol.exe
+C:\Users\VNEL\Documents\Visual Studio 2013\Projects\Acutrol\Acutrol\bin\Debug\Acutrol.pdb
+C:\Users\VNEL\Documents\Visual Studio 2013\Projects\Acutrol\Acutrol\obj\Debug\Acutrol.csprojResolveAssemblyReference.cache
+C:\Users\VNEL\Documents\Visual Studio 2013\Projects\Acutrol\Acutrol\obj\Debug\Acutrol.Form1.resources
+C:\Users\VNEL\Documents\Visual Studio 2013\Projects\Acutrol\Acutrol\obj\Debug\Acutrol.Properties.Resources.resources
+C:\Users\VNEL\Documents\Visual Studio 2013\Projects\Acutrol\Acutrol\obj\Debug\Acutrol.csproj.GenerateResource.Cache
+C:\Users\VNEL\Documents\Visual Studio 2013\Projects\Acutrol\Acutrol\obj\Debug\Acutrol.exe
+C:\Users\VNEL\Documents\Visual Studio 2013\Projects\Acutrol\Acutrol\obj\Debug\Acutrol.pdb
+C:\Users\VNEL\Documents\Visual Studio 2013\Projects\Acutrol\Acutrol\bin\Debug\NationalInstruments.Common.Native.dll
