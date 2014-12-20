@@ -62,6 +62,7 @@
             this.comboBoxSelectMode = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.textBoxLimitPosH = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -70,7 +71,7 @@
             this.textBoxLimitPosL = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBoxLimitRate = new System.Windows.Forms.TextBox();
-            this.textBoxLimitPosH = new System.Windows.Forms.TextBox();
+            this.RemoteMode = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -383,6 +384,13 @@
             this.panel4.Size = new System.Drawing.Size(317, 203);
             this.panel4.TabIndex = 12;
             // 
+            // textBoxLimitPosH
+            // 
+            this.textBoxLimitPosH.Location = new System.Drawing.Point(227, 33);
+            this.textBoxLimitPosH.Name = "textBoxLimitPosH";
+            this.textBoxLimitPosH.Size = new System.Drawing.Size(70, 20);
+            this.textBoxLimitPosH.TabIndex = 11;
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(239, 165);
@@ -450,18 +458,22 @@
             this.textBoxLimitRate.Size = new System.Drawing.Size(100, 20);
             this.textBoxLimitRate.TabIndex = 4;
             // 
-            // textBoxLimitPosH
+            // RemoteMode
             // 
-            this.textBoxLimitPosH.Location = new System.Drawing.Point(227, 33);
-            this.textBoxLimitPosH.Name = "textBoxLimitPosH";
-            this.textBoxLimitPosH.Size = new System.Drawing.Size(70, 20);
-            this.textBoxLimitPosH.TabIndex = 11;
+            this.RemoteMode.Location = new System.Drawing.Point(748, 474);
+            this.RemoteMode.Name = "RemoteMode";
+            this.RemoteMode.Size = new System.Drawing.Size(75, 41);
+            this.RemoteMode.TabIndex = 16;
+            this.RemoteMode.Text = "Remote Mode";
+            this.RemoteMode.UseVisualStyleBackColor = true;
+            this.RemoteMode.Click += new System.EventHandler(this.RemoteMode_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 621);
+            this.Controls.Add(this.RemoteMode);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.comboBoxSelectMode);
@@ -530,6 +542,7 @@
         private System.Windows.Forms.TextBox textBoxLimitPosL;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBoxLimitRate;
+        private System.Windows.Forms.Button RemoteMode;
     }
 }
 
