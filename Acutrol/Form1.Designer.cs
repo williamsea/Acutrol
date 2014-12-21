@@ -355,7 +355,7 @@
             this.comboBoxSelectMode.FormattingEnabled = true;
             this.comboBoxSelectMode.Location = new System.Drawing.Point(42, 97);
             this.comboBoxSelectMode.Name = "comboBoxSelectMode";
-            this.comboBoxSelectMode.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSelectMode.Size = new System.Drawing.Size(164, 21);
             this.comboBoxSelectMode.TabIndex = 14;
             this.comboBoxSelectMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectMode_SelectedIndexChanged);
             // 
