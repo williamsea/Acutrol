@@ -29,6 +29,14 @@ namespace Acutrol
         //Open a generic Session first
         Session mySession = null;
 
+        String Position = "P";
+        String Rate = "R";
+        String Acceleration = "A";
+        String PositionMode = "P";
+        String AbsRateMode = "A";
+        String RelativeRateMode = "R";
+        String SynthesisMode = "S";
+
         public Form1()
         {
             InitializeComponent();
@@ -45,94 +53,39 @@ namespace Acutrol
         {
             if (comboBoxSelectMode.SelectedItem == "Position Mode")
             {
-                try
-                {
-                    PositionMode();
-                }
-
-                catch (VisaException v_exp)
-                {
-                    MessageBox.Show(v_exp.Message);
-                }
-                catch (Exception exp)
-                {
-                    MessageBox.Show(exp.Message);
-                }
+                SelectMode(PositionMode);
             }
             else if (comboBoxSelectMode.SelectedItem == "Relative Rate Mode")
             {
-                
-                try
-                {
-                    RelativeRateMode();
-                }
-
-                catch (VisaException v_exp)
-                {
-                    MessageBox.Show(v_exp.Message);
-                }
-                catch (Exception exp)
-                {
-                    MessageBox.Show(exp.Message);
-                }
+                SelectMode(RelativeRateMode);
             }
             else if (comboBoxSelectMode.SelectedItem == "Absolute Rate Mode")
             {
-                
-                try
-                {
-                    AbsRateMode();
-                }
-
-                catch (VisaException v_exp)
-                {
-                    MessageBox.Show(v_exp.Message);
-                }
-                catch (Exception exp)
-                {
-                    MessageBox.Show(exp.Message);
-                }
+                SelectMode(AbsRateMode);
             }
             else if (comboBoxSelectMode.SelectedItem == "Synthesis Mode")
             {
-                
-                try
-                {
-                    SynthesisMode();
-                }
-
-                catch (VisaException v_exp)
-                {
-                    MessageBox.Show(v_exp.Message);
-                }
-                catch (Exception exp)
-                {
-                    MessageBox.Show(exp.Message);
-                }
+                SelectMode(SynthesisMode);
             }
         }
 
-        private void SynthesisMode()
+        private void SelectMode(String chosenMode)
         {
-            //Send Position Query command
-            mbSession.Write(":M:S 1 \n");
+            try
+            {
+                mbSession.Write(":M:"+chosenMode+" 1 \n");
+            }
+
+            catch (VisaException v_exp)
+            {
+                MessageBox.Show(v_exp.Message);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
 
-        private void AbsRateMode()
-        {
-            mbSession.Write(":M:A 1 \n");
-        }
-
-        private void RelativeRateMode()
-        {
-            mbSession.Write(":M:R 1 \n");
-        }
-
-        private void PositionMode()
-        {
-            //Send Position Query command
-            mbSession.Write(":M:P 1 \n");
-        }
 
         private void openMySession()
         {
@@ -145,17 +98,23 @@ namespace Acutrol
         //Show (Read) the position, rate and acceleration of specific channel chosen
         private void ShowFrameAxis()
         {
-            //response string
             string responseString = null;
+            responseString = ReadParameter(responseString, Position);
+            textReadPos.Text = responseString;
+            responseString = ReadParameter(responseString, Rate);
+            textReadRate.Text = responseString;
+            responseString = ReadParameter(responseString, Acceleration);
+            textReadAcc.Text = responseString;
+        }
 
+        private string ReadParameter(string responseString, string targetParameter)
+        {
             try
             {
-                //openMySession();
-                responseString = ReadPosition(responseString);
-                responseString = ReadRate(responseString);
-                responseString = ReadAcceleration(responseString);
-                //mySession.Dispose();
-
+                //Send target Query command
+                mbSession.Write(":u:f f ; :R:"+targetParameter+" 1 \n");
+                //Read the response
+                responseString = mbSession.ReadString();  
             }
             catch (VisaException v_exp)
             {
@@ -165,39 +124,6 @@ namespace Acutrol
             {
                 MessageBox.Show(exp.Message);
             }
-
-        }
-
-        private string ReadAcceleration(string responseString)
-        {
-            //Send Acceleration Query command
-            mbSession.Write(":u:f f ; :R:A 1 \n");
-            //Read the response
-            responseString = mbSession.ReadString();
-            //Write to Textbox
-            textReadAcc.Text = responseString;
-            return responseString;
-        }
-
-        private string ReadRate(string responseString)
-        {
-            //Send Rate Query command
-            mbSession.Write(":u:f f ; :R:R 1 \n");
-            //Read the response
-            responseString = mbSession.ReadString();
-            //Write to Textbox
-            textReadRate.Text = responseString;
-            return responseString;
-        }
-
-        private string ReadPosition(string responseString)
-        {
-            //Send Position Query command
-            mbSession.Write(":u:f f ; :R:P 1 \n");
-            //Read the response
-            responseString = mbSession.ReadString();
-            //Write to Textbox
-            textReadPos.Text = responseString;
             return responseString;
         }
 
@@ -208,12 +134,18 @@ namespace Acutrol
 
         private void SetAxisParameters()
         {
-          
+             CommendParameter(Position);
+             CommendParameter(Rate);
+             CommendParameter(Acceleration);
+        }
+
+
+        private void CommendParameter(string targetParameter)
+        {
             try
             {
-                CommendPosition();
-                CommendRate();
-                CommendAcceleration();
+                //Set target command
+                 mbSession.Write(":D:"+targetParameter+" 1, " + textBoxSetPos.Text.ToString() + " \n");
             }
             catch (VisaException v_exp)
             {
@@ -223,24 +155,6 @@ namespace Acutrol
             {
                 MessageBox.Show(exp.Message);
             }
-        }
-
-        private void CommendAcceleration()
-        {
-            //Set Acceleration command
-            mbSession.Write(":D:A 1, " + textBoxSetAcc.Text.ToString() + " \n");
-        }
-
-        private void CommendRate()
-        {
-            //Set Rate command
-            mbSession.Write(":D:R 1, " + textBoxSetRate.Text.ToString() + " \n");
-        }
-
-        private void CommendPosition()
-        {
-            //Set Position command
-            mbSession.Write(":D:P 1, " + textBoxSetPos.Text.ToString() + " \n");
         }
 
         private void ExecuteCommendButton_Click(object sender, EventArgs e)
@@ -256,10 +170,8 @@ namespace Acutrol
                 // Toggle the hardware GPIB REN line.
                 GpibSession gpib = (GpibSession)mySession;
                 gpib.ControlRen(RenMode.DeassertAfterGtl);
-
                 //Close the Session
                 mbSession.Dispose();
-
                 ShowAxis.Enabled = false;
             }
             catch (VisaException v_exp)
@@ -275,9 +187,15 @@ namespace Acutrol
 
         private void SinInputButton_Click(object sender, EventArgs e)
         {
+             CommendSinusoidal();
+        }
+
+        private void CommendSinusoidal()
+        {
             try
             {
-                CommendSinusoidal();
+                //Set Magnitude, Frequency and Phase for sinusoidal input (default channel 1)
+                 mbSession.Write(":D:O 1, " + textBoxSetMagn.Text.ToString() + ", " + textBoxSetFreq.Text.ToString() + ", " + textBoxSetPhase.Text.ToString() + " \n");
             }
             catch (VisaException v_exp)
             {
@@ -287,13 +205,6 @@ namespace Acutrol
             {
                 MessageBox.Show(exp.Message);
             }
-
-        }
-
-        private void CommendSinusoidal()
-        {
-            //Set Magnitude, Frequency and Phase for sinusoidal input (default channel 1)
-            mbSession.Write(":D:O 1, " + textBoxSetMagn.Text.ToString() + ", " + textBoxSetFreq.Text.ToString() + ", " + textBoxSetPhase.Text.ToString() + " \n");
         }
 
         private void RemoteMode_Click(object sender, EventArgs e)
