@@ -99,22 +99,20 @@ namespace Acutrol
         private void ShowFrameAxis()
         {
             string responseString = null;
-            responseString = ReadParameter(responseString, Position);
-            textReadPos.Text = responseString;
-            responseString = ReadParameter(responseString, Rate);
-            textReadRate.Text = responseString;
-            responseString = ReadParameter(responseString, Acceleration);
-            textReadAcc.Text = responseString;
+            responseString = ReadParameter(responseString, Position, textReadPos);   
+            responseString = ReadParameter(responseString, Rate, textReadRate);
+            responseString = ReadParameter(responseString, Acceleration, textReadAcc);
         }
 
-        private string ReadParameter(string responseString, string targetParameter)
+        private string ReadParameter(string responseString, string targetParameter, TextBox targetTextBox)
         {
             try
             {
                 //Send target Query command
                 mbSession.Write(":u:f f ; :R:"+targetParameter+" 1 \n");
                 //Read the response
-                responseString = mbSession.ReadString();  
+                responseString = mbSession.ReadString();
+                targetTextBox.Text = responseString;
             }
             catch (VisaException v_exp)
             {
@@ -134,18 +132,18 @@ namespace Acutrol
 
         private void SetAxisParameters()
         {
-             CommendParameter(Position);
-             CommendParameter(Rate);
-             CommendParameter(Acceleration);
+            CommendParameter(Position, textBoxSetPos);
+            CommendParameter(Rate, textBoxSetRate);
+            CommendParameter(Acceleration, textBoxSetAcc);
         }
 
 
-        private void CommendParameter(string targetParameter)
+        private void CommendParameter(string targetParameter, TextBox targetTextBox)
         {
             try
             {
                 //Set target command
-                 mbSession.Write(":D:"+targetParameter+" 1, " + textBoxSetPos.Text.ToString() + " \n");
+                mbSession.Write(":D:" + targetParameter + " 1, " + targetTextBox.Text.ToString() + " \n");
             }
             catch (VisaException v_exp)
             {
