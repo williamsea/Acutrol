@@ -63,19 +63,34 @@
             this.label15 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.textBoxLimitPosH = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ExecuteLimitButton = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxLimitAcc = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxLimitPosL = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBoxLimitRate = new System.Windows.Forms.TextBox();
             this.RemoteMode = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.comboBox_window6 = new System.Windows.Forms.ComboBox();
+            this.comboBox_window5 = new System.Windows.Forms.ComboBox();
+            this.comboBox_window4 = new System.Windows.Forms.ComboBox();
+            this.comboBox_window3 = new System.Windows.Forms.ComboBox();
+            this.comboBox_window2 = new System.Windows.Forms.ComboBox();
+            this.comboBox_window1 = new System.Windows.Forms.ComboBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -250,7 +265,7 @@
             // 
             // ReturnLocalButton
             // 
-            this.ReturnLocalButton.Location = new System.Drawing.Point(630, 474);
+            this.ReturnLocalButton.Location = new System.Drawing.Point(403, 521);
             this.ReturnLocalButton.Name = "ReturnLocalButton";
             this.ReturnLocalButton.Size = new System.Drawing.Size(75, 41);
             this.ReturnLocalButton.TabIndex = 12;
@@ -371,9 +386,9 @@
             // panel4
             // 
             this.panel4.Controls.Add(this.textBoxLimitPosH);
-            this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.ExecuteLimitButton);
             this.panel4.Controls.Add(this.label16);
-            this.panel4.Controls.Add(this.textBox1);
+            this.panel4.Controls.Add(this.textBoxLimitAcc);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Controls.Add(this.label18);
             this.panel4.Controls.Add(this.textBoxLimitPosL);
@@ -391,14 +406,15 @@
             this.textBoxLimitPosH.Size = new System.Drawing.Size(70, 20);
             this.textBoxLimitPosH.TabIndex = 11;
             // 
-            // button1
+            // ExecuteLimitButton
             // 
-            this.button1.Location = new System.Drawing.Point(239, 165);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Execute";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ExecuteLimitButton.Location = new System.Drawing.Point(239, 165);
+            this.ExecuteLimitButton.Name = "ExecuteLimitButton";
+            this.ExecuteLimitButton.Size = new System.Drawing.Size(75, 23);
+            this.ExecuteLimitButton.TabIndex = 10;
+            this.ExecuteLimitButton.Text = "Execute";
+            this.ExecuteLimitButton.UseVisualStyleBackColor = true;
+            this.ExecuteLimitButton.Click += new System.EventHandler(this.ExecuteLimitButton_Click);
             // 
             // label16
             // 
@@ -410,12 +426,12 @@
             this.label16.TabIndex = 9;
             this.label16.Text = "Parameter Limitation Settings:";
             // 
-            // textBox1
+            // textBoxLimitAcc
             // 
-            this.textBox1.Location = new System.Drawing.Point(164, 136);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 5;
+            this.textBoxLimitAcc.Location = new System.Drawing.Point(164, 136);
+            this.textBoxLimitAcc.Name = "textBoxLimitAcc";
+            this.textBoxLimitAcc.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLimitAcc.TabIndex = 5;
             // 
             // label17
             // 
@@ -460,7 +476,7 @@
             // 
             // RemoteMode
             // 
-            this.RemoteMode.Location = new System.Drawing.Point(748, 474);
+            this.RemoteMode.Location = new System.Drawing.Point(501, 521);
             this.RemoteMode.Name = "RemoteMode";
             this.RemoteMode.Size = new System.Drawing.Size(75, 41);
             this.RemoteMode.TabIndex = 16;
@@ -468,11 +484,150 @@
             this.RemoteMode.UseVisualStyleBackColor = true;
             this.RemoteMode.Click += new System.EventHandler(this.RemoteMode_Click);
             // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.comboBox_window6);
+            this.panel5.Controls.Add(this.comboBox_window5);
+            this.panel5.Controls.Add(this.comboBox_window4);
+            this.panel5.Controls.Add(this.comboBox_window3);
+            this.panel5.Controls.Add(this.comboBox_window2);
+            this.panel5.Controls.Add(this.comboBox_window1);
+            this.panel5.Controls.Add(this.label26);
+            this.panel5.Controls.Add(this.label25);
+            this.panel5.Controls.Add(this.label24);
+            this.panel5.Controls.Add(this.label23);
+            this.panel5.Controls.Add(this.label22);
+            this.panel5.Controls.Add(this.label20);
+            this.panel5.Controls.Add(this.label21);
+            this.panel5.Location = new System.Drawing.Point(748, 359);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(317, 203);
+            this.panel5.TabIndex = 12;
+            // 
+            // comboBox_window6
+            // 
+            this.comboBox_window6.FormattingEnabled = true;
+            this.comboBox_window6.Location = new System.Drawing.Point(123, 153);
+            this.comboBox_window6.Name = "comboBox_window6";
+            this.comboBox_window6.Size = new System.Drawing.Size(164, 21);
+            this.comboBox_window6.TabIndex = 22;
+            this.comboBox_window6.SelectedIndexChanged += new System.EventHandler(this.comboBox_window6_SelectedIndexChanged);
+            // 
+            // comboBox_window5
+            // 
+            this.comboBox_window5.FormattingEnabled = true;
+            this.comboBox_window5.Location = new System.Drawing.Point(123, 129);
+            this.comboBox_window5.Name = "comboBox_window5";
+            this.comboBox_window5.Size = new System.Drawing.Size(164, 21);
+            this.comboBox_window5.TabIndex = 21;
+            this.comboBox_window5.SelectedIndexChanged += new System.EventHandler(this.comboBox_window5_SelectedIndexChanged);
+            // 
+            // comboBox_window4
+            // 
+            this.comboBox_window4.FormattingEnabled = true;
+            this.comboBox_window4.Location = new System.Drawing.Point(123, 105);
+            this.comboBox_window4.Name = "comboBox_window4";
+            this.comboBox_window4.Size = new System.Drawing.Size(164, 21);
+            this.comboBox_window4.TabIndex = 20;
+            this.comboBox_window4.SelectedIndexChanged += new System.EventHandler(this.comboBox_window4_SelectedIndexChanged);
+            // 
+            // comboBox_window3
+            // 
+            this.comboBox_window3.FormattingEnabled = true;
+            this.comboBox_window3.Location = new System.Drawing.Point(123, 81);
+            this.comboBox_window3.Name = "comboBox_window3";
+            this.comboBox_window3.Size = new System.Drawing.Size(164, 21);
+            this.comboBox_window3.TabIndex = 19;
+            this.comboBox_window3.SelectedIndexChanged += new System.EventHandler(this.comboBox_window3_SelectedIndexChanged);
+            // 
+            // comboBox_window2
+            // 
+            this.comboBox_window2.FormattingEnabled = true;
+            this.comboBox_window2.Location = new System.Drawing.Point(123, 57);
+            this.comboBox_window2.Name = "comboBox_window2";
+            this.comboBox_window2.Size = new System.Drawing.Size(164, 21);
+            this.comboBox_window2.TabIndex = 18;
+            this.comboBox_window2.SelectedIndexChanged += new System.EventHandler(this.comboBox_window2_SelectedIndexChanged);
+            // 
+            // comboBox_window1
+            // 
+            this.comboBox_window1.FormattingEnabled = true;
+            this.comboBox_window1.Location = new System.Drawing.Point(123, 33);
+            this.comboBox_window1.Name = "comboBox_window1";
+            this.comboBox_window1.Size = new System.Drawing.Size(164, 21);
+            this.comboBox_window1.TabIndex = 17;
+            this.comboBox_window1.SelectedIndexChanged += new System.EventHandler(this.comboBox_window1_SelectedIndexChanged);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(17, 163);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(61, 13);
+            this.label26.TabIndex = 15;
+            this.label26.Text = "Window 6: ";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(17, 137);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(61, 13);
+            this.label25.TabIndex = 14;
+            this.label25.Text = "Window 5: ";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(17, 111);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(61, 13);
+            this.label24.TabIndex = 13;
+            this.label24.Text = "Window 4: ";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(17, 85);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(61, 13);
+            this.label23.TabIndex = 12;
+            this.label23.Text = "Window 3: ";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(17, 59);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(61, 13);
+            this.label22.TabIndex = 11;
+            this.label22.Text = "Window 2: ";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(3, 10);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(112, 13);
+            this.label20.TabIndex = 9;
+            this.label20.Text = "Windows Settings:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(17, 33);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(61, 13);
+            this.label21.TabIndex = 2;
+            this.label21.Text = "Window 1: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 621);
+            this.Controls.Add(this.panel5);
             this.Controls.Add(this.RemoteMode);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.label15);
@@ -493,6 +648,8 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -534,15 +691,29 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox textBoxLimitPosH;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ExecuteLimitButton;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxLimitAcc;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox textBoxLimitPosL;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBoxLimitRate;
         private System.Windows.Forms.Button RemoteMode;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox comboBox_window1;
+        private System.Windows.Forms.ComboBox comboBox_window6;
+        private System.Windows.Forms.ComboBox comboBox_window5;
+        private System.Windows.Forms.ComboBox comboBox_window4;
+        private System.Windows.Forms.ComboBox comboBox_window3;
+        private System.Windows.Forms.ComboBox comboBox_window2;
     }
 }
 
