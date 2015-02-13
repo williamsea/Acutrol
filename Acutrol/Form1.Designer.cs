@@ -38,7 +38,18 @@
             this.textReadAcc = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxRateModeAccLim = new System.Windows.Forms.TextBox();
+            this.textBoxRateModeRateLim = new System.Windows.Forms.TextBox();
+            this.textBoxPosModeAccLim = new System.Windows.Forms.TextBox();
+            this.textBoxPosModeRateLim = new System.Windows.Forms.TextBox();
+            this.textBoxPosLimHigh = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBoxSynModeAccLim = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.textBoxPosLimLow = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.textBoxSynModeRateLim = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ExecuteCommendButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -86,11 +97,17 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -116,7 +133,7 @@
             // 
             // textReadRate
             // 
-            this.textReadRate.Location = new System.Drawing.Point(164, 88);
+            this.textReadRate.Location = new System.Drawing.Point(164, 59);
             this.textReadRate.Name = "textReadRate";
             this.textReadRate.Size = new System.Drawing.Size(100, 20);
             this.textReadRate.TabIndex = 4;
@@ -124,7 +141,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 88);
+            this.label2.Location = new System.Drawing.Point(44, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 7;
@@ -133,7 +150,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(43, 139);
+            this.label3.Location = new System.Drawing.Point(43, 88);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 8;
@@ -141,7 +158,7 @@
             // 
             // textReadAcc
             // 
-            this.textReadAcc.Location = new System.Drawing.Point(164, 136);
+            this.textReadAcc.Location = new System.Drawing.Point(164, 88);
             this.textReadAcc.Name = "textReadAcc";
             this.textReadAcc.Size = new System.Drawing.Size(100, 20);
             this.textReadAcc.TabIndex = 5;
@@ -158,17 +175,66 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label33);
+            this.panel1.Controls.Add(this.label32);
+            this.panel1.Controls.Add(this.textBoxRateModeAccLim);
+            this.panel1.Controls.Add(this.textBoxRateModeRateLim);
+            this.panel1.Controls.Add(this.textBoxPosModeAccLim);
+            this.panel1.Controls.Add(this.textBoxPosModeRateLim);
+            this.panel1.Controls.Add(this.textBoxPosLimHigh);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.textReadAcc);
+            this.panel1.Controls.Add(this.textBoxSynModeAccLim);
+            this.panel1.Controls.Add(this.label31);
             this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label28);
+            this.panel1.Controls.Add(this.label29);
             this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.textBoxPosLimLow);
             this.panel1.Controls.Add(this.textReadPos);
+            this.panel1.Controls.Add(this.label30);
             this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.textBoxSynModeRateLim);
             this.panel1.Controls.Add(this.textReadRate);
             this.panel1.Location = new System.Drawing.Point(43, 135);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(317, 203);
             this.panel1.TabIndex = 10;
+            // 
+            // textBoxRateModeAccLim
+            // 
+            this.textBoxRateModeAccLim.Location = new System.Drawing.Point(191, 165);
+            this.textBoxRateModeAccLim.Name = "textBoxRateModeAccLim";
+            this.textBoxRateModeAccLim.Size = new System.Drawing.Size(51, 20);
+            this.textBoxRateModeAccLim.TabIndex = 14;
+            // 
+            // textBoxRateModeRateLim
+            // 
+            this.textBoxRateModeRateLim.Location = new System.Drawing.Point(191, 143);
+            this.textBoxRateModeRateLim.Name = "textBoxRateModeRateLim";
+            this.textBoxRateModeRateLim.Size = new System.Drawing.Size(51, 20);
+            this.textBoxRateModeRateLim.TabIndex = 13;
+            // 
+            // textBoxPosModeAccLim
+            // 
+            this.textBoxPosModeAccLim.Location = new System.Drawing.Point(122, 165);
+            this.textBoxPosModeAccLim.Name = "textBoxPosModeAccLim";
+            this.textBoxPosModeAccLim.Size = new System.Drawing.Size(51, 20);
+            this.textBoxPosModeAccLim.TabIndex = 12;
+            // 
+            // textBoxPosModeRateLim
+            // 
+            this.textBoxPosModeRateLim.Location = new System.Drawing.Point(122, 143);
+            this.textBoxPosModeRateLim.Name = "textBoxPosModeRateLim";
+            this.textBoxPosModeRateLim.Size = new System.Drawing.Size(51, 20);
+            this.textBoxPosModeRateLim.TabIndex = 11;
+            // 
+            // textBoxPosLimHigh
+            // 
+            this.textBoxPosLimHigh.Location = new System.Drawing.Point(220, 113);
+            this.textBoxPosLimHigh.Name = "textBoxPosLimHigh";
+            this.textBoxPosLimHigh.Size = new System.Drawing.Size(44, 20);
+            this.textBoxPosLimHigh.TabIndex = 10;
             // 
             // label5
             // 
@@ -179,6 +245,54 @@
             this.label5.Size = new System.Drawing.Size(125, 13);
             this.label5.TabIndex = 9;
             this.label5.Text = "Parameter Readings:";
+            // 
+            // textBoxSynModeAccLim
+            // 
+            this.textBoxSynModeAccLim.Location = new System.Drawing.Point(263, 165);
+            this.textBoxSynModeAccLim.Name = "textBoxSynModeAccLim";
+            this.textBoxSynModeAccLim.Size = new System.Drawing.Size(51, 20);
+            this.textBoxSynModeAccLim.TabIndex = 5;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(43, 117);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(76, 13);
+            this.label28.TabIndex = 2;
+            this.label28.Text = "Position Limits:";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(3, 165);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(93, 13);
+            this.label29.TabIndex = 8;
+            this.label29.Text = "Acceleration Limit:";
+            // 
+            // textBoxPosLimLow
+            // 
+            this.textBoxPosLimLow.Location = new System.Drawing.Point(164, 113);
+            this.textBoxPosLimLow.Name = "textBoxPosLimLow";
+            this.textBoxPosLimLow.Size = new System.Drawing.Size(41, 20);
+            this.textBoxPosLimLow.TabIndex = 3;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(3, 146);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(57, 13);
+            this.label30.TabIndex = 7;
+            this.label30.Text = "Rate Limit:";
+            // 
+            // textBoxSynModeRateLim
+            // 
+            this.textBoxSynModeRateLim.Location = new System.Drawing.Point(263, 143);
+            this.textBoxSynModeRateLim.Name = "textBoxSynModeRateLim";
+            this.textBoxSynModeRateLim.Size = new System.Drawing.Size(51, 20);
+            this.textBoxSynModeRateLim.TabIndex = 4;
             // 
             // panel2
             // 
@@ -265,7 +379,7 @@
             // 
             // ReturnLocalButton
             // 
-            this.ReturnLocalButton.Location = new System.Drawing.Point(403, 521);
+            this.ReturnLocalButton.Location = new System.Drawing.Point(630, 67);
             this.ReturnLocalButton.Name = "ReturnLocalButton";
             this.ReturnLocalButton.Size = new System.Drawing.Size(75, 41);
             this.ReturnLocalButton.TabIndex = 12;
@@ -476,7 +590,7 @@
             // 
             // RemoteMode
             // 
-            this.RemoteMode.Location = new System.Drawing.Point(501, 521);
+            this.RemoteMode.Location = new System.Drawing.Point(731, 67);
             this.RemoteMode.Name = "RemoteMode";
             this.RemoteMode.Size = new System.Drawing.Size(75, 41);
             this.RemoteMode.TabIndex = 16;
@@ -622,6 +736,51 @@
             this.label21.TabIndex = 2;
             this.label21.Text = "Window 1: ";
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.label27);
+            this.panel6.Location = new System.Drawing.Point(403, 359);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(317, 203);
+            this.panel6.TabIndex = 10;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(3, 10);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(160, 13);
+            this.label27.TabIndex = 9;
+            this.label27.Text = "Other Parameter Readings:";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(99, 150);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(17, 13);
+            this.label31.TabIndex = 2;
+            this.label31.Text = "P:";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(175, 150);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(18, 13);
+            this.label32.TabIndex = 15;
+            this.label32.Text = "R:";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(247, 150);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(17, 13);
+            this.label33.TabIndex = 16;
+            this.label33.Text = "S:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -636,6 +795,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.ReturnLocalButton);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label4);
             this.Name = "Form1";
@@ -650,6 +810,8 @@
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -714,6 +876,22 @@
         private System.Windows.Forms.ComboBox comboBox_window4;
         private System.Windows.Forms.ComboBox comboBox_window3;
         private System.Windows.Forms.ComboBox comboBox_window2;
+        private System.Windows.Forms.TextBox textBoxPosLimHigh;
+        private System.Windows.Forms.TextBox textBoxSynModeAccLim;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox textBoxPosLimLow;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox textBoxSynModeRateLim;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox textBoxRateModeAccLim;
+        private System.Windows.Forms.TextBox textBoxRateModeRateLim;
+        private System.Windows.Forms.TextBox textBoxPosModeAccLim;
+        private System.Windows.Forms.TextBox textBoxPosModeRateLim;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label31;
     }
 }
 

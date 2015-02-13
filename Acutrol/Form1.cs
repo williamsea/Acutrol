@@ -17,7 +17,7 @@ namespace Acutrol
      * Remarks:
      * 1.Channel 1 is the only channel in use. So the default channel is channel 1.
      * 
-     * 
+     * //TODO Safety Mechanism. Set acceleration limits during moves. Check commends and feedbacks before performing the move.
      */
     
     public partial class Form1 : Form
@@ -39,7 +39,7 @@ namespace Acutrol
         String RateMode = "R";
         String SynthesisMode = "S";
 
-        //Parameters
+        //Parameters for contents of Display Windows
         String RawPositionFeedback = "1081";
         String EstimatedPosition = "1082";
         String FilteredVelocityEstimate = "1038";
@@ -47,14 +47,16 @@ namespace Acutrol
         String ProfilerPositionCommend = "1008";
         String ProfilerVelocityCommend = "1009";
         String ProfilerAccelCommend = "1010";
-        String MaximunPositionLimit = "1144";
-        String MinimunPositionLimit = "1145";
-        String PositionModeVelocityLimit = "1147";
-        String PositionModeAccelLimit = "1148";
-        String RateModeVelocityLimit = "1150";
-        String RateModeAccelLimit = "1151";
-        String SynthesisModeVelocityLimit = "1153";
-        String SynthesisModeAccelLimit = "1154";
+        String MinimunPositionLimit = "1145"; String OvarMinPosLim = "1";
+        String MaximunPositionLimit = "1144"; String OvarMaxPosLim = "2";
+        String SynthesisModeVelocityLimit = "1153"; String OvarSynModeVeloLim = "3";
+        String SynthesisModeAccelLimit = "1154"; String OvarSynModeAccLim = "4"; 
+        String PositionModeVelocityLimit = "1147"; String OvarPosModeVeloLim = "5";
+        //only 1-5 is allowed! for ECP variables
+        String PositionModeAccelLimit = "1148"; String OvarPosModeAccLim = "6";
+        String RateModeVelocityLimit = "1150"; String OvarRateModeVeloLim = "7";
+        String RateModeAccelLimit = "1151"; String OvarRateModeAccLim = "8";
+
 
 
         public Form1()
@@ -75,11 +77,21 @@ namespace Acutrol
 
             //comboBoxSelectMode.SelectedIndex = 1;
             openMySession();
+            //Setup Ovariable
+            mbSession.Write(":c:o " + OvarMinPosLim + " , " + MinimunPositionLimit + " \n");
+            mbSession.Write(":c:o " + OvarMaxPosLim + " , " + MaximunPositionLimit + " \n");
+            mbSession.Write(":c:o " + OvarSynModeVeloLim + " , " + SynthesisModeVelocityLimit + " \n");
+            mbSession.Write(":c:o " + OvarSynModeAccLim + " , " + SynthesisModeAccelLimit + " \n");
+            mbSession.Write(":c:o " + OvarPosModeVeloLim + " , " + PositionModeVelocityLimit + " \n");
+            mbSession.Write(":c:o " + OvarPosModeAccLim + " , " + PositionModeAccelLimit + " \n");
+            mbSession.Write(":c:o " + OvarRateModeVeloLim + " , " + RateModeVelocityLimit + " \n");
+            mbSession.Write(":c:o " + OvarRateModeAccLim + " , " + RateModeAccelLimit + " \n");
         }
 
         private void initComboBoxWindows(ComboBox targetComboBox)
         {
             targetComboBox.Text = "---Please Assign Parameters---";
+            //Readings of position, rate, acceleration and their commends
             targetComboBox.Items.Add("Raw Position Feedback");
             targetComboBox.Items.Add("Estimated Position");
             targetComboBox.Items.Add("Filtered Velocity Estimate");
@@ -87,6 +99,7 @@ namespace Acutrol
             targetComboBox.Items.Add("Profiler Position Commend");
             targetComboBox.Items.Add("Profiler Velocity Commend");
             targetComboBox.Items.Add("Profiler Accel Commend");
+            //Limitations
             targetComboBox.Items.Add("Maximun Position Limit");
             targetComboBox.Items.Add("Minimun Position Limit");
             targetComboBox.Items.Add("Position Mode Velocity Limit");
@@ -150,6 +163,14 @@ namespace Acutrol
             responseString = ReadParameter(responseString, Position, textReadPos);   
             responseString = ReadParameter(responseString, Rate, textReadRate);
             responseString = ReadParameter(responseString, Acceleration, textReadAcc);
+            responseString = ReadOvarParameter(responseString, OvarMinPosLim, textBoxPosLimLow);
+            responseString = ReadOvarParameter(responseString, OvarMaxPosLim, textBoxPosLimHigh);
+            responseString = ReadOvarParameter(responseString, OvarSynModeVeloLim, textBoxSynModeRateLim);
+            responseString = ReadOvarParameter(responseString, OvarSynModeAccLim, textBoxSynModeAccLim);
+            responseString = ReadOvarParameter(responseString, OvarPosModeVeloLim, textBoxPosModeRateLim); //ok
+            //responseString = ReadOvarParameter(responseString, OvarPosModeAccLim, textBoxPosModeAccLim); //seems ok
+            //responseString = ReadOvarParameter(responseString, OvarRateModeVeloLim, textBoxRateModeRateLim); //bad
+            //responseString = ReadOvarParameter(responseString, OvarRateModeAccLim, textBoxRateModeAccLim); //bad
         }
 
         private string ReadParameter(string responseString, string targetParameter, TextBox targetTextBox)
@@ -158,6 +179,27 @@ namespace Acutrol
             {
                 //Send target Query command
                 mbSession.Write(":u:f f ; :R:"+targetParameter+" 1 \n");
+                //Read the response
+                responseString = mbSession.ReadString();
+                targetTextBox.Text = responseString;
+            }
+            catch (VisaException v_exp)
+            {
+                MessageBox.Show(v_exp.Message);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            return responseString;
+        }
+
+        private string ReadOvarParameter(string responseString, string Ovariable, TextBox targetTextBox)
+        {
+            try
+            {
+                //Send target Query command
+                mbSession.Write(":u:f f ; :r:o " + Ovariable + " \n");
                 //Read the response
                 responseString = mbSession.ReadString();
                 targetTextBox.Text = responseString;
