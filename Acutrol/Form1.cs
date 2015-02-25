@@ -41,12 +41,13 @@ namespace Acutrol
 
         //Parameters for contents of Display Windows
         String RawPositionFeedback = "1081";
-        String EstimatedPosition = "1082";
+        String EstimatedPosition = "1082";//default 1: position
+        String EstimatedVelocity = "1083";//default 2: velocity
         String FilteredVelocityEstimate = "1038";
-        String FilteredAccelEstimate = "1039";
-        String ProfilerPositionCommend = "1008";
-        String ProfilerVelocityCommend = "1009";
-        String ProfilerAccelCommend = "1010";
+        String FilteredAccelEstimate = "1039";//default 3: acceleration
+        String ProfilerPositionCommend = "1008";//default 4: position commend
+        String ProfilerVelocityCommend = "1009";//default 5: velocity commend
+        String ProfilerAccelCommend = "1010";//default 6: acceleration commend
         String MinimunPositionLimit = "1145"; String OvarMinPosLim = "1";
         String MaximunPositionLimit = "1144"; String OvarMaxPosLim = "2";
         String SynthesisModeVelocityLimit = "1153"; String OvarSynModeVeloLim = "3";
@@ -62,7 +63,8 @@ namespace Acutrol
         public Form1()
         {
             InitializeComponent();
-            comboBoxSelectMode.Text = "---Please Select Mode---";
+            //comboBoxSelectMode.Text = "---Please Select Mode---";//Already set the default mode to be position mode
+            comboBoxSelectMode.Text = "Position Mode (default)";
             comboBoxSelectMode.Items.Add("Position Mode");
             comboBoxSelectMode.Items.Add("Relative Rate Mode");
             comboBoxSelectMode.Items.Add("Absolute Rate Mode");
@@ -77,15 +79,22 @@ namespace Acutrol
 
             //comboBoxSelectMode.SelectedIndex = 1;
             openMySession();
+
+            //set the default mode to be position mode
+            SelectMode(PositionMode);
+
+            //Set default limitations before switching btw different modes
+            SetAllLimits();//default values
+
             //Setup Ovariable
-            mbSession.Write(":c:o " + OvarMinPosLim + " , " + MinimunPositionLimit + " \n");
-            mbSession.Write(":c:o " + OvarMaxPosLim + " , " + MaximunPositionLimit + " \n");
-            mbSession.Write(":c:o " + OvarSynModeVeloLim + " , " + SynthesisModeVelocityLimit + " \n");
-            mbSession.Write(":c:o " + OvarSynModeAccLim + " , " + SynthesisModeAccelLimit + " \n");
-            mbSession.Write(":c:o " + OvarPosModeVeloLim + " , " + PositionModeVelocityLimit + " \n");
-            mbSession.Write(":c:o " + OvarPosModeAccLim + " , " + PositionModeAccelLimit + " \n");
-            mbSession.Write(":c:o " + OvarRateModeVeloLim + " , " + RateModeVelocityLimit + " \n");
-            mbSession.Write(":c:o " + OvarRateModeAccLim + " , " + RateModeAccelLimit + " \n");
+            //mbSession.Write(":c:o " + OvarMinPosLim + " , " + MinimunPositionLimit + " \n");
+            //mbSession.Write(":c:o " + OvarMaxPosLim + " , " + MaximunPositionLimit + " \n");
+            //mbSession.Write(":c:o " + OvarSynModeVeloLim + " , " + SynthesisModeVelocityLimit + " \n");
+            //mbSession.Write(":c:o " + OvarSynModeAccLim + " , " + SynthesisModeAccelLimit + " \n");
+            //mbSession.Write(":c:o " + OvarPosModeVeloLim + " , " + PositionModeVelocityLimit + " \n");//Allows only 5 data selects per ECP available for overiable config
+            //mbSession.Write(":c:o " + OvarPosModeAccLim + " , " + PositionModeAccelLimit + " \n");
+            //mbSession.Write(":c:o " + OvarRateModeVeloLim + " , " + RateModeVelocityLimit + " \n");
+            //mbSession.Write(":c:o " + OvarRateModeAccLim + " , " + RateModeAccelLimit + " \n");
         }
 
         private void initComboBoxWindows(ComboBox targetComboBox)
@@ -94,6 +103,7 @@ namespace Acutrol
             //Readings of position, rate, acceleration and their commends
             targetComboBox.Items.Add("Raw Position Feedback");
             targetComboBox.Items.Add("Estimated Position");
+            targetComboBox.Items.Add("Estimated Velocity");
             targetComboBox.Items.Add("Filtered Velocity Estimate");
             targetComboBox.Items.Add("Filtered Accel Estimate");
             targetComboBox.Items.Add("Profiler Position Commend");
@@ -163,14 +173,15 @@ namespace Acutrol
             responseString = ReadParameter(responseString, Position, textReadPos);   
             responseString = ReadParameter(responseString, Rate, textReadRate);
             responseString = ReadParameter(responseString, Acceleration, textReadAcc);
-            responseString = ReadOvarParameter(responseString, OvarMinPosLim, textBoxPosLimLow);
-            responseString = ReadOvarParameter(responseString, OvarMaxPosLim, textBoxPosLimHigh);
-            responseString = ReadOvarParameter(responseString, OvarSynModeVeloLim, textBoxSynModeRateLim);
-            responseString = ReadOvarParameter(responseString, OvarSynModeAccLim, textBoxSynModeAccLim);
-            responseString = ReadOvarParameter(responseString, OvarPosModeVeloLim, textBoxPosModeRateLim); //ok
-            //responseString = ReadOvarParameter(responseString, OvarPosModeAccLim, textBoxPosModeAccLim); //seems ok
-            //responseString = ReadOvarParameter(responseString, OvarRateModeVeloLim, textBoxRateModeRateLim); //bad
-            //responseString = ReadOvarParameter(responseString, OvarRateModeAccLim, textBoxRateModeAccLim); //bad
+            /*Read Ovariables*/
+            //responseString = ReadOvarParameter(responseString, OvarMinPosLim, textBoxPosLimLow);
+            //responseString = ReadOvarParameter(responseString, OvarMaxPosLim, textBoxPosLimHigh);
+            //responseString = ReadOvarParameter(responseString, OvarSynModeVeloLim, textBoxSynModeRateLim);
+            //responseString = ReadOvarParameter(responseString, OvarSynModeAccLim, textBoxSynModeAccLim);
+            //responseString = ReadOvarParameter(responseString, OvarPosModeVeloLim, textBoxPosModeRateLim); //Allows only 5 data selects per ECP available for overiable config
+            //responseString = ReadOvarParameter(responseString, OvarPosModeAccLim, textBoxPosModeAccLim); 
+            //responseString = ReadOvarParameter(responseString, OvarRateModeVeloLim, textBoxRateModeRateLim); 
+            //responseString = ReadOvarParameter(responseString, OvarRateModeAccLim, textBoxRateModeAccLim); 
         }
 
         private string ReadParameter(string responseString, string targetParameter, TextBox targetTextBox)
@@ -303,39 +314,59 @@ namespace Acutrol
 
         private void ExecuteLimitButton_Click(object sender, EventArgs e)
         {
-            if (comboBoxSelectMode.SelectedItem == "Position Mode")
-            {
-                SetLimitations(PositionMode);
-            }
-            else if (comboBoxSelectMode.SelectedItem == "Relative Rate Mode" || comboBoxSelectMode.SelectedItem == "Absolute Rate Mode")
-            {
-                SetLimitations(RateMode);
-            }
-            else if (comboBoxSelectMode.SelectedItem == "Synthesis Mode")
-            {
-                SetLimitations(SynthesisMode);
-            }
+            /*The following code set the limitations for all modes with the same choen limited values*/
+            SetAllLimits();
+
+            /*The following code set the limitations under a specific mode, i.e Pos, Velo, Acc value under one of Pos, Rate, Syn modes*/
+            //if (comboBoxSelectMode.SelectedItem == "Position Mode")
+            //{
+            //    SetLimitations(PositionMode);
+            //}
+            //else if (comboBoxSelectMode.SelectedItem == "Relative Rate Mode" || comboBoxSelectMode.SelectedItem == "Absolute Rate Mode")
+            //{
+            //    SetLimitations(RateMode);
+            //}
+            //else if (comboBoxSelectMode.SelectedItem == "Synthesis Mode")
+            //{
+            //    SetLimitations(SynthesisMode);
+            //}
            
         }
 
-        private void SetLimitations(String selectedMode)
+        private void SetAllLimits()
         {
-            try
-            {
-                //Set Limitations for different modes 
-                mbSession.Write(":L :L " + selectedMode + " 1 " + textBoxLimitPosL.Text.ToString() + "; :L :H " + selectedMode + " 1 " + textBoxLimitPosH.Text.ToString() + " \n");
-                mbSession.Write(":L :R " + selectedMode + " 1 " + textBoxLimitRate.Text.ToString() + " \n");
-                mbSession.Write(":L :A " + selectedMode + " 1 " + textBoxLimitAcc.Text.ToString() + " \n");
-            }
-            catch (VisaException v_exp)
-            {
-                MessageBox.Show(v_exp.Message);
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show(exp.Message);
-            }
+            mbSession.Write(":L :L " + PositionMode + " 1 " + textBoxLimitPosL.Text.ToString() + "; :L :H " + PositionMode + " 1 " + textBoxLimitPosH.Text.ToString() + " \n");
+            mbSession.Write(":L :R " + PositionMode + " 1 " + textBoxLimitRate.Text.ToString() + " \n");
+            mbSession.Write(":L :A " + PositionMode + " 1 " + textBoxLimitAcc.Text.ToString() + " \n");
+
+            mbSession.Write(":L :L " + RateMode + " 1 " + textBoxLimitPosL.Text.ToString() + "; :L :H " + RateMode + " 1 " + textBoxLimitPosH.Text.ToString() + " \n");
+            mbSession.Write(":L :R " + RateMode + " 1 " + textBoxLimitRate.Text.ToString() + " \n");
+            mbSession.Write(":L :A " + RateMode + " 1 " + textBoxLimitAcc.Text.ToString() + " \n");
+
+            mbSession.Write(":L :L " + SynthesisMode + " 1 " + textBoxLimitPosL.Text.ToString() + "; :L :H " + SynthesisMode + " 1 " + textBoxLimitPosH.Text.ToString() + " \n");
+            mbSession.Write(":L :R " + SynthesisMode + " 1 " + textBoxLimitRate.Text.ToString() + " \n");
+            mbSession.Write(":L :A " + SynthesisMode + " 1 " + textBoxLimitAcc.Text.ToString() + " \n");
         }
+
+        /*The following code set the limitations under a specific mode, i.e Pos, Velo, Acc value under one of Pos, Rate, Syn modes*/
+        //private void SetLimitations(String selectedMode)
+        //{
+        //    try
+        //    {
+        //        //Set Limitations for different modes 
+        //        mbSession.Write(":L :L " + selectedMode + " 1 " + textBoxLimitPosL.Text.ToString() + "; :L :H " + selectedMode + " 1 " + textBoxLimitPosH.Text.ToString() + " \n");
+        //        mbSession.Write(":L :R " + selectedMode + " 1 " + textBoxLimitRate.Text.ToString() + " \n");
+        //        mbSession.Write(":L :A " + selectedMode + " 1 " + textBoxLimitAcc.Text.ToString() + " \n");
+        //    }
+        //    catch (VisaException v_exp)
+        //    {
+        //        MessageBox.Show(v_exp.Message);
+        //    }
+        //    catch (Exception exp)
+        //    {
+        //        MessageBox.Show(exp.Message);
+        //    }
+        //}
 
         private void comboBox_window1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -379,6 +410,10 @@ namespace Acutrol
                 else if (targetComboBox.SelectedItem == "Estimated Position")
                 {
                     mbSession.Write(":C:W " + windowNum + ", " + EstimatedPosition + "  \n");
+                }
+                else if (targetComboBox.SelectedItem == "Estimated Velocity")
+                {
+                    mbSession.Write(":C:W " + windowNum + ", " + EstimatedVelocity + "  \n");
                 }
                 else if (targetComboBox.SelectedItem == "Filtered Velocity Estimate")
                 {
@@ -441,6 +476,41 @@ namespace Acutrol
             {
                 MessageBox.Show(exp.Message);
             }
+        }
+
+        private void button_default_windows_Click(object sender, EventArgs e)
+        {
+            mbSession.Write(":C:W 1, " + EstimatedPosition + "  \n");
+            mbSession.Write(":C:W 2, " + EstimatedVelocity + "  \n");
+            mbSession.Write(":C:W 3, " + FilteredAccelEstimate + "  \n");
+            mbSession.Write(":C:W 4, " + ProfilerPositionCommend + "  \n");
+            mbSession.Write(":C:W 5, " + ProfilerVelocityCommend + "  \n");
+            mbSession.Write(":C:W 6, " + ProfilerAccelCommend + "  \n");
+        }
+
+        private void button_showLimits_Click(object sender, EventArgs e)
+        {
+            mbSession.Write(":C:W 1, " + MinimunPositionLimit + "  \n");
+            mbSession.Write(":C:W 2, " + MaximunPositionLimit + "  \n");
+            mbSession.Write(":C:W 3, " + SynthesisModeVelocityLimit + "  \n");
+            mbSession.Write(":C:W 4, " + SynthesisModeAccelLimit + "  \n");
+            mbSession.Write(":C:W 5, " + PositionModeVelocityLimit + "  \n");
+            mbSession.Write(":C:W 6, " + PositionModeAccelLimit + "  \n");
+            //mbSession.Write(":C:W 5, " + RateModeVelocityLimit + "  \n");
+            //mbSession.Write(":C:W 6, " + RateModeAccelLimit + "  \n");
+        }
+
+        private void button_reset_limits_Click(object sender, EventArgs e)
+        {
+            textBoxLimitPosL.Clear();
+            textBoxLimitPosH.Clear();
+            textBoxLimitRate.Clear();
+            textBoxLimitAcc.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
