@@ -76,7 +76,7 @@
             this.comboBoxSelectMode = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.edit_default_button = new System.Windows.Forms.Button();
             this.button_reset_limits = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
@@ -108,6 +108,19 @@
             this.label21 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label27 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -132,16 +145,16 @@
             // 
             // textReadPos
             // 
-            this.textReadPos.Location = new System.Drawing.Point(164, 30);
+            this.textReadPos.Location = new System.Drawing.Point(134, 30);
             this.textReadPos.Name = "textReadPos";
-            this.textReadPos.Size = new System.Drawing.Size(100, 20);
+            this.textReadPos.Size = new System.Drawing.Size(81, 20);
             this.textReadPos.TabIndex = 3;
             // 
             // textReadRate
             // 
-            this.textReadRate.Location = new System.Drawing.Point(164, 59);
+            this.textReadRate.Location = new System.Drawing.Point(134, 59);
             this.textReadRate.Name = "textReadRate";
-            this.textReadRate.Size = new System.Drawing.Size(100, 20);
+            this.textReadRate.Size = new System.Drawing.Size(81, 20);
             this.textReadRate.TabIndex = 4;
             // 
             // label2
@@ -164,9 +177,9 @@
             // 
             // textReadAcc
             // 
-            this.textReadAcc.Location = new System.Drawing.Point(164, 88);
+            this.textReadAcc.Location = new System.Drawing.Point(134, 88);
             this.textReadAcc.Name = "textReadAcc";
-            this.textReadAcc.Size = new System.Drawing.Size(100, 20);
+            this.textReadAcc.Size = new System.Drawing.Size(81, 20);
             this.textReadAcc.TabIndex = 5;
             // 
             // label4
@@ -181,6 +194,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label38);
+            this.panel1.Controls.Add(this.label37);
+            this.panel1.Controls.Add(this.label36);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.textReadAcc);
             this.panel1.Controls.Add(this.label1);
@@ -188,7 +204,7 @@
             this.panel1.Controls.Add(this.textReadPos);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.textReadRate);
-            this.panel1.Location = new System.Drawing.Point(50, 135);
+            this.panel1.Location = new System.Drawing.Point(59, 212);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(317, 126);
             this.panel1.TabIndex = 10;
@@ -315,7 +331,10 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label43);
             this.panel2.Controls.Add(this.ExecuteCommendButton);
+            this.panel2.Controls.Add(this.label44);
+            this.panel2.Controls.Add(this.label45);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.textBoxSetAcc);
             this.panel2.Controls.Add(this.label7);
@@ -330,7 +349,7 @@
             // 
             // ExecuteCommendButton
             // 
-            this.ExecuteCommendButton.Location = new System.Drawing.Point(64, 168);
+            this.ExecuteCommendButton.Location = new System.Drawing.Point(20, 168);
             this.ExecuteCommendButton.Name = "ExecuteCommendButton";
             this.ExecuteCommendButton.Size = new System.Drawing.Size(75, 23);
             this.ExecuteCommendButton.TabIndex = 10;
@@ -352,7 +371,7 @@
             // 
             this.textBoxSetAcc.Location = new System.Drawing.Point(20, 132);
             this.textBoxSetAcc.Name = "textBoxSetAcc";
-            this.textBoxSetAcc.Size = new System.Drawing.Size(100, 20);
+            this.textBoxSetAcc.Size = new System.Drawing.Size(70, 20);
             this.textBoxSetAcc.TabIndex = 5;
             // 
             // label7
@@ -377,7 +396,7 @@
             // 
             this.textBoxSetPos.Location = new System.Drawing.Point(20, 49);
             this.textBoxSetPos.Name = "textBoxSetPos";
-            this.textBoxSetPos.Size = new System.Drawing.Size(100, 20);
+            this.textBoxSetPos.Size = new System.Drawing.Size(70, 20);
             this.textBoxSetPos.TabIndex = 3;
             // 
             // label9
@@ -393,7 +412,7 @@
             // 
             this.textBoxSetRate.Location = new System.Drawing.Point(20, 91);
             this.textBoxSetRate.Name = "textBoxSetRate";
-            this.textBoxSetRate.Size = new System.Drawing.Size(100, 20);
+            this.textBoxSetRate.Size = new System.Drawing.Size(70, 20);
             this.textBoxSetRate.TabIndex = 4;
             // 
             // ReturnLocalButton
@@ -408,6 +427,9 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.label48);
+            this.panel3.Controls.Add(this.label47);
+            this.panel3.Controls.Add(this.label46);
             this.panel3.Controls.Add(this.SinInputButton);
             this.panel3.Controls.Add(this.label10);
             this.panel3.Controls.Add(this.textBoxSetPhase);
@@ -418,12 +440,12 @@
             this.panel3.Controls.Add(this.textBoxSetFreq);
             this.panel3.Location = new System.Drawing.Point(842, 135);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(150, 203);
+            this.panel3.Size = new System.Drawing.Size(196, 203);
             this.panel3.TabIndex = 13;
             // 
             // SinInputButton
             // 
-            this.SinInputButton.Location = new System.Drawing.Point(44, 163);
+            this.SinInputButton.Location = new System.Drawing.Point(19, 168);
             this.SinInputButton.Name = "SinInputButton";
             this.SinInputButton.Size = new System.Drawing.Size(75, 23);
             this.SinInputButton.TabIndex = 10;
@@ -492,7 +514,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(39, 32);
+            this.label14.Location = new System.Drawing.Point(58, 100);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(81, 13);
             this.label14.TabIndex = 10;
@@ -501,7 +523,7 @@
             // comboBoxSelectMode
             // 
             this.comboBoxSelectMode.FormattingEnabled = true;
-            this.comboBoxSelectMode.Location = new System.Drawing.Point(42, 97);
+            this.comboBoxSelectMode.Location = new System.Drawing.Point(58, 151);
             this.comboBoxSelectMode.Name = "comboBoxSelectMode";
             this.comboBoxSelectMode.Size = new System.Drawing.Size(164, 21);
             this.comboBoxSelectMode.TabIndex = 14;
@@ -510,7 +532,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(40, 81);
+            this.label15.Location = new System.Drawing.Point(56, 135);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(70, 13);
             this.label15.TabIndex = 15;
@@ -518,7 +540,11 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.button3);
+            this.panel4.Controls.Add(this.label42);
+            this.panel4.Controls.Add(this.label41);
+            this.panel4.Controls.Add(this.label40);
+            this.panel4.Controls.Add(this.label39);
+            this.panel4.Controls.Add(this.edit_default_button);
             this.panel4.Controls.Add(this.button_reset_limits);
             this.panel4.Controls.Add(this.label35);
             this.panel4.Controls.Add(this.label34);
@@ -536,15 +562,15 @@
             this.panel4.Size = new System.Drawing.Size(221, 203);
             this.panel4.TabIndex = 12;
             // 
-            // button3
+            // edit_default_button
             // 
-            this.button3.Location = new System.Drawing.Point(145, 42);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(56, 52);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "Edit Default Values";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.edit_default_button.Location = new System.Drawing.Point(160, 36);
+            this.edit_default_button.Name = "edit_default_button";
+            this.edit_default_button.Size = new System.Drawing.Size(56, 52);
+            this.edit_default_button.TabIndex = 15;
+            this.edit_default_button.Text = "Edit Default Values";
+            this.edit_default_button.UseVisualStyleBackColor = true;
+            this.edit_default_button.Click += new System.EventHandler(this.edit_default_button_Click);
             // 
             // button_reset_limits
             // 
@@ -608,7 +634,7 @@
             this.textBoxLimitAcc.Name = "textBoxLimitAcc";
             this.textBoxLimitAcc.Size = new System.Drawing.Size(55, 20);
             this.textBoxLimitAcc.TabIndex = 5;
-            this.textBoxLimitAcc.Text = "20";
+            this.textBoxLimitAcc.Text = "10";
             // 
             // label17
             // 
@@ -651,7 +677,7 @@
             this.textBoxLimitRate.Name = "textBoxLimitRate";
             this.textBoxLimitRate.Size = new System.Drawing.Size(55, 20);
             this.textBoxLimitRate.TabIndex = 4;
-            this.textBoxLimitRate.Text = "50";
+            this.textBoxLimitRate.Text = "10";
             // 
             // RemoteMode
             // 
@@ -855,6 +881,123 @@
             this.label27.TabIndex = 9;
             this.label27.Text = "Other Parameter Readings:";
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(221, 30);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(27, 13);
+            this.label36.TabIndex = 17;
+            this.label36.Text = "Deg";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(221, 59);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(37, 13);
+            this.label37.TabIndex = 18;
+            this.label37.Text = "Deg/s";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(221, 91);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(49, 13);
+            this.label38.TabIndex = 19;
+            this.label38.Text = "Deg/s^2";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(127, 49);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(27, 13);
+            this.label39.TabIndex = 20;
+            this.label39.Text = "Deg";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(127, 69);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(27, 13);
+            this.label40.TabIndex = 21;
+            this.label40.Text = "Deg";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(127, 111);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(37, 13);
+            this.label41.TabIndex = 20;
+            this.label41.Text = "Deg/s";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(127, 146);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(49, 13);
+            this.label42.TabIndex = 20;
+            this.label42.Text = "Deg/s^2";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(97, 139);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(49, 13);
+            this.label43.TabIndex = 22;
+            this.label43.Text = "Deg/s^2";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(97, 95);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(37, 13);
+            this.label44.TabIndex = 21;
+            this.label44.Text = "Deg/s";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(97, 49);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(27, 13);
+            this.label45.TabIndex = 20;
+            this.label45.Text = "Deg";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(122, 53);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(27, 13);
+            this.label46.TabIndex = 23;
+            this.label46.Text = "Deg";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(122, 91);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(20, 13);
+            this.label47.TabIndex = 24;
+            this.label47.Text = "Hz";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(122, 130);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(27, 13);
+            this.label48.TabIndex = 25;
+            this.label48.Text = "Deg";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -971,7 +1114,20 @@
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Button button_showLimits;
         private System.Windows.Forms.Button button_reset_limits;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button edit_default_button;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label46;
     }
 }
 

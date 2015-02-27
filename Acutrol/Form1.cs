@@ -18,6 +18,7 @@ namespace Acutrol
      * 1.Channel 1 is the only channel in use. So the default channel is channel 1.
      * 
      * //TODO Safety Mechanism. Set acceleration limits during moves. Check commends and feedbacks before performing the move.
+     * //TODO add units, remotely config analog input to 0
      */
     
     public partial class Form1 : Form
@@ -83,7 +84,7 @@ namespace Acutrol
             //set the default mode to be position mode
             SelectMode(PositionMode);
 
-            //Set default limitations before switching btw different modes
+            //Set default limitations just after initialization, before all the other actions
             SetAllLimits();//default values
 
             //Setup Ovariable
@@ -508,7 +509,7 @@ namespace Acutrol
             textBoxLimitAcc.Clear();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void edit_default_button_Click(object sender, EventArgs e)
         {
 
         }
