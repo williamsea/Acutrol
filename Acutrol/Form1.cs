@@ -16,9 +16,8 @@ namespace Acutrol
      * @author: Hai Tang (william.sea@jhu.edu)
      * Remarks:
      * 1.Channel 1 is the only channel in use. So the default channel is channel 1.
-     * 
-     * //TODO Safety Mechanism. Set acceleration limits during moves. Check commends and feedbacks before performing the move.
-     * //TODO add units, remotely config analog input to 0
+     * //TODO use Touch to set ROT/LIN to 1
+     * //TODO remotely config analog input to 0
      */
     
     public partial class Form1 : Form
@@ -39,6 +38,7 @@ namespace Acutrol
         String RelativeRateMode = "R";
         String RateMode = "R";
         String SynthesisMode = "S";
+        String AbortMode = "A";
 
         //Parameters for contents of Display Windows
         String RawPositionFeedback = "1081";
@@ -58,6 +58,8 @@ namespace Acutrol
         String PositionModeAccelLimit = "1148"; String OvarPosModeAccLim = "6";
         String RateModeVelocityLimit = "1150"; String OvarRateModeVeloLim = "7";
         String RateModeAccelLimit = "1151"; String OvarRateModeAccLim = "8";
+        String AbortModeVelocityLimit = "1159";
+        String AbortModeAccelLimit = "1160";
 
 
 
@@ -81,12 +83,20 @@ namespace Acutrol
             //comboBoxSelectMode.SelectedIndex = 1;
             openMySession();
 
+            //Setup ECP 80 then 87 using TOUCH commend
+            mbSession.Write("u:t 179,179,176,32,152,144,32,50,176,181,176,32,152,151,32,50,176,181,181,181 \n");
+
+            System.Threading.Thread.Sleep(10000);//wait for 10s for ECP to be restored
+            //Set analog inputs gain to 0 
+            mbSession.Write(":u:t 180,177,178,50,32,144,32,176,181,179,50,32,144,32,176,181,181,181 \n");
+
             //set the default mode to be position mode
             SelectMode(PositionMode);
 
             //Set default limitations just after initialization, before all the other actions
             SetAllLimits();//default values
 
+            MessageBox.Show("ECP has been set to 80 then 87; Analog input 1&2 gain has been set to 0; Default mode is Position Mode; All limits are set to default.");
             //Setup Ovariable
             //mbSession.Write(":c:o " + OvarMinPosLim + " , " + MinimunPositionLimit + " \n");
             //mbSession.Write(":c:o " + OvarMaxPosLim + " , " + MaximunPositionLimit + " \n");
@@ -161,10 +171,26 @@ namespace Acutrol
 
         private void openMySession()
         {
+            closeMySession();
+
             //open a Session to the VNA
             mySession = ResourceManager.GetLocalManager().Open(sAddress);
             //cast this to a message based session
             mbSession = (MessageBasedSession)mySession;
+        }
+
+        private void closeMySession()
+        {
+            if (mbSession == null)
+                return;
+
+            // Toggle the hardware GPIB REN line.
+            GpibSession gpib = (GpibSession)mySession;
+            gpib.ControlRen(RenMode.DeassertAfterGtl);
+
+            //Close the Session
+            mbSession.Dispose();
+            mbSession = null;
         }
 
         //Show (Read) the position, rate and acceleration of specific channel chosen
@@ -229,7 +255,7 @@ namespace Acutrol
 
         private void ShowAxis_Tick(object sender, EventArgs e)
         {
-            ShowFrameAxis();
+            //ShowFrameAxis();
         }
 
         private void SetAxisParameters()
@@ -262,16 +288,14 @@ namespace Acutrol
             SetAxisParameters();
         }
 
+        
+
         private void ReturnLocalButton_Click(object sender, EventArgs e)
         {
 
             try
             {
-                // Toggle the hardware GPIB REN line.
-                GpibSession gpib = (GpibSession)mySession;
-                gpib.ControlRen(RenMode.DeassertAfterGtl);
-                //Close the Session
-                mbSession.Dispose();
+                closeMySession();
                 ShowAxis.Enabled = false;
             }
             catch (VisaException v_exp)
@@ -347,6 +371,10 @@ namespace Acutrol
             mbSession.Write(":L :L " + SynthesisMode + " 1 " + textBoxLimitPosL.Text.ToString() + "; :L :H " + SynthesisMode + " 1 " + textBoxLimitPosH.Text.ToString() + " \n");
             mbSession.Write(":L :R " + SynthesisMode + " 1 " + textBoxLimitRate.Text.ToString() + " \n");
             mbSession.Write(":L :A " + SynthesisMode + " 1 " + textBoxLimitAcc.Text.ToString() + " \n");
+
+            mbSession.Write(":L :R " + AbortMode + " 1 " + textBoxLimitRate.Text.ToString() + " \n");
+            mbSession.Write(":L :A " + AbortMode + " 1 " + textBoxLimitAcc.Text.ToString() + " \n");
+
         }
 
         /*The following code set the limitations under a specific mode, i.e Pos, Velo, Acc value under one of Pos, Rate, Syn modes*/
@@ -495,8 +523,10 @@ namespace Acutrol
             mbSession.Write(":C:W 2, " + MaximunPositionLimit + "  \n");
             mbSession.Write(":C:W 3, " + SynthesisModeVelocityLimit + "  \n");
             mbSession.Write(":C:W 4, " + SynthesisModeAccelLimit + "  \n");
-            mbSession.Write(":C:W 5, " + PositionModeVelocityLimit + "  \n");
-            mbSession.Write(":C:W 6, " + PositionModeAccelLimit + "  \n");
+            mbSession.Write(":C:W 5, " + AbortModeVelocityLimit + "  \n");
+            mbSession.Write(":C:W 6, " + AbortModeAccelLimit + "  \n");
+            //mbSession.Write(":C:W 5, " + PositionModeVelocityLimit + "  \n");
+            //mbSession.Write(":C:W 6, " + PositionModeAccelLimit + "  \n");
             //mbSession.Write(":C:W 5, " + RateModeVelocityLimit + "  \n");
             //mbSession.Write(":C:W 6, " + RateModeAccelLimit + "  \n");
         }

@@ -38,6 +38,9 @@
             this.textReadAcc = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
@@ -54,7 +57,10 @@
             this.label30 = new System.Windows.Forms.Label();
             this.textBoxSynModeRateLim = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label43 = new System.Windows.Forms.Label();
             this.ExecuteCommendButton = new System.Windows.Forms.Button();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxSetAcc = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -64,6 +70,9 @@
             this.textBoxSetRate = new System.Windows.Forms.TextBox();
             this.ReturnLocalButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
             this.SinInputButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxSetPhase = new System.Windows.Forms.TextBox();
@@ -76,6 +85,10 @@
             this.comboBoxSelectMode = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
             this.edit_default_button = new System.Windows.Forms.Button();
             this.button_reset_limits = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
@@ -108,19 +121,7 @@
             this.label21 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label27 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -208,6 +209,33 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(317, 126);
             this.panel1.TabIndex = 10;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(221, 91);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(49, 13);
+            this.label38.TabIndex = 19;
+            this.label38.Text = "Deg/s^2";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(221, 59);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(37, 13);
+            this.label37.TabIndex = 18;
+            this.label37.Text = "Deg/s";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(221, 30);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(27, 13);
+            this.label36.TabIndex = 17;
+            this.label36.Text = "Deg";
             // 
             // label5
             // 
@@ -342,10 +370,19 @@
             this.panel2.Controls.Add(this.textBoxSetPos);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.textBoxSetRate);
-            this.panel2.Location = new System.Drawing.Point(646, 135);
+            this.panel2.Location = new System.Drawing.Point(705, 135);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(167, 203);
             this.panel2.TabIndex = 11;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(97, 139);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(49, 13);
+            this.label43.TabIndex = 22;
+            this.label43.Text = "Deg/s^2";
             // 
             // ExecuteCommendButton
             // 
@@ -356,6 +393,24 @@
             this.ExecuteCommendButton.Text = "Execute";
             this.ExecuteCommendButton.UseVisualStyleBackColor = true;
             this.ExecuteCommendButton.Click += new System.EventHandler(this.ExecuteCommendButton_Click);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(97, 95);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(37, 13);
+            this.label44.TabIndex = 21;
+            this.label44.Text = "Deg/s";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(97, 49);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(27, 13);
+            this.label45.TabIndex = 20;
+            this.label45.Text = "Deg";
             // 
             // label6
             // 
@@ -438,10 +493,37 @@
             this.panel3.Controls.Add(this.textBoxSetMagn);
             this.panel3.Controls.Add(this.label13);
             this.panel3.Controls.Add(this.textBoxSetFreq);
-            this.panel3.Location = new System.Drawing.Point(842, 135);
+            this.panel3.Location = new System.Drawing.Point(878, 135);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(196, 203);
+            this.panel3.Size = new System.Drawing.Size(160, 203);
             this.panel3.TabIndex = 13;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(122, 130);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(27, 13);
+            this.label48.TabIndex = 25;
+            this.label48.Text = "Deg";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(122, 91);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(20, 13);
+            this.label47.TabIndex = 24;
+            this.label47.Text = "Hz";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(122, 53);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(27, 13);
+            this.label46.TabIndex = 23;
+            this.label46.Text = "Deg";
             // 
             // SinInputButton
             // 
@@ -559,12 +641,48 @@
             this.panel4.Controls.Add(this.textBoxLimitRate);
             this.panel4.Location = new System.Drawing.Point(396, 135);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(221, 203);
+            this.panel4.Size = new System.Drawing.Size(303, 203);
             this.panel4.TabIndex = 12;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(127, 146);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(49, 13);
+            this.label42.TabIndex = 20;
+            this.label42.Text = "Deg/s^2";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(127, 111);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(37, 13);
+            this.label41.TabIndex = 20;
+            this.label41.Text = "Deg/s";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(127, 69);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(27, 13);
+            this.label40.TabIndex = 21;
+            this.label40.Text = "Deg";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(127, 49);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(27, 13);
+            this.label39.TabIndex = 20;
+            this.label39.Text = "Deg";
             // 
             // edit_default_button
             // 
-            this.edit_default_button.Location = new System.Drawing.Point(160, 36);
+            this.edit_default_button.Location = new System.Drawing.Point(214, 36);
             this.edit_default_button.Name = "edit_default_button";
             this.edit_default_button.Size = new System.Drawing.Size(56, 52);
             this.edit_default_button.TabIndex = 15;
@@ -574,7 +692,7 @@
             // 
             // button_reset_limits
             // 
-            this.button_reset_limits.Location = new System.Drawing.Point(35, 174);
+            this.button_reset_limits.Location = new System.Drawing.Point(159, 174);
             this.button_reset_limits.Name = "button_reset_limits";
             this.button_reset_limits.Size = new System.Drawing.Size(56, 26);
             this.button_reset_limits.TabIndex = 14;
@@ -606,11 +724,11 @@
             this.textBoxLimitPosH.Name = "textBoxLimitPosH";
             this.textBoxLimitPosH.Size = new System.Drawing.Size(55, 20);
             this.textBoxLimitPosH.TabIndex = 11;
-            this.textBoxLimitPosH.Text = "100";
+            this.textBoxLimitPosH.Text = "20";
             // 
             // ExecuteLimitButton
             // 
-            this.ExecuteLimitButton.Location = new System.Drawing.Point(103, 174);
+            this.ExecuteLimitButton.Location = new System.Drawing.Point(234, 174);
             this.ExecuteLimitButton.Name = "ExecuteLimitButton";
             this.ExecuteLimitButton.Size = new System.Drawing.Size(56, 26);
             this.ExecuteLimitButton.TabIndex = 10;
@@ -660,7 +778,7 @@
             this.textBoxLimitPosL.Name = "textBoxLimitPosL";
             this.textBoxLimitPosL.Size = new System.Drawing.Size(55, 20);
             this.textBoxLimitPosL.TabIndex = 3;
-            this.textBoxLimitPosL.Text = "-100";
+            this.textBoxLimitPosL.Text = "-20";
             // 
             // label19
             // 
@@ -881,128 +999,22 @@
             this.label27.TabIndex = 9;
             this.label27.Text = "Other Parameter Readings:";
             // 
-            // label36
+            // label49
             // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(221, 30);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(27, 13);
-            this.label36.TabIndex = 17;
-            this.label36.Text = "Deg";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(221, 59);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(37, 13);
-            this.label37.TabIndex = 18;
-            this.label37.Text = "Deg/s";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(221, 91);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(49, 13);
-            this.label38.TabIndex = 19;
-            this.label38.Text = "Deg/s^2";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(127, 49);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(27, 13);
-            this.label39.TabIndex = 20;
-            this.label39.Text = "Deg";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(127, 69);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(27, 13);
-            this.label40.TabIndex = 21;
-            this.label40.Text = "Deg";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(127, 111);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(37, 13);
-            this.label41.TabIndex = 20;
-            this.label41.Text = "Deg/s";
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(127, 146);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(49, 13);
-            this.label42.TabIndex = 20;
-            this.label42.Text = "Deg/s^2";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(97, 139);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(49, 13);
-            this.label43.TabIndex = 22;
-            this.label43.Text = "Deg/s^2";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(97, 95);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(37, 13);
-            this.label44.TabIndex = 21;
-            this.label44.Text = "Deg/s";
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(97, 49);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(27, 13);
-            this.label45.TabIndex = 20;
-            this.label45.Text = "Deg";
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(122, 53);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(27, 13);
-            this.label46.TabIndex = 23;
-            this.label46.Text = "Deg";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(122, 91);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(20, 13);
-            this.label47.TabIndex = 24;
-            this.label47.Text = "Hz";
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(122, 130);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(27, 13);
-            this.label48.TabIndex = 25;
-            this.label48.Text = "Deg";
+            this.label49.AutoSize = true;
+            this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label49.Location = new System.Drawing.Point(389, 119);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(316, 13);
+            this.label49.TabIndex = 22;
+            this.label49.Text = "Set all Rate and Accel Limits under Pos, Rate, Accel, Abort Mode";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 621);
+            this.Controls.Add(this.label49);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.RemoteMode);
             this.Controls.Add(this.panel4);
@@ -1128,6 +1140,7 @@
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label49;
     }
 }
 
