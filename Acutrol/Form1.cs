@@ -16,8 +16,12 @@ namespace Acutrol
      * @author: Hai Tang (william.sea@jhu.edu)
      * Remarks:
      * 1.Channel 1 is the only channel in use. So the default channel is channel 1.
-     * //TODO use Touch to set ROT/LIN to 1
-     * //TODO remotely config analog input to 0
+     * 
+     * TODO: 
+     * 1.setup abs limits (1140,1141) and ROT/LIN
+     * 2.reset all the limits according to charley and LabView
+     * 3.auto execute: close - pos mode go to zero - syn mode 20 cycles with 1Hz 15.9 degree, slow start and slow end - open
+     * 
      */
     
     public partial class Form1 : Form
@@ -49,6 +53,7 @@ namespace Acutrol
         String ProfilerPositionCommend = "1008";//default 4: position commend
         String ProfilerVelocityCommend = "1009";//default 5: velocity commend
         String ProfilerAccelCommend = "1010";//default 6: acceleration commend
+        //Limits
         String MinimunPositionLimit = "1145"; String OvarMinPosLim = "1";
         String MaximunPositionLimit = "1144"; String OvarMaxPosLim = "2";
         String SynthesisModeVelocityLimit = "1153"; String OvarSynModeVeloLim = "3";
@@ -60,7 +65,13 @@ namespace Acutrol
         String RateModeAccelLimit = "1151"; String OvarRateModeAccLim = "8";
         String AbortModeVelocityLimit = "1159";
         String AbortModeAccelLimit = "1160";
+        String VelocityAbsoluteLimit = "1140";
+        String AccelAbsoluteLimit = "1141";
 
+        double[] PosValArray = new double[100000]; //array used to store position values
+        int disp = 0; //counter used for display data
+        int counter = 0; //counter used to store data array
+        int DispLength = 300; //30s
 
 
         public Form1()
@@ -83,20 +94,29 @@ namespace Acutrol
             //comboBoxSelectMode.SelectedIndex = 1;
             openMySession();
 
-            //Setup ECP 80 then 87 using TOUCH commend
-            mbSession.Write("u:t 179,179,176,32,152,144,32,50,176,181,176,32,152,151,32,50,176,181,181,181 \n");
+            ////Setup ECP 80 then 87 using TOUCH commend
+            //mbSession.Write("u:t 179,179,176,32,152,144,32,50,176,181,176,32,152,151,32,50,176,181,181,181 \n");
 
-            System.Threading.Thread.Sleep(10000);//wait for 10s for ECP to be restored
-            //Set analog inputs gain to 0 
-            mbSession.Write(":u:t 180,177,178,50,32,144,32,176,181,179,50,32,144,32,176,181,181,181 \n");
+            ////Set analog inputs gain to 0 
+            //System.Threading.Thread.Sleep(10000);//wait for 10s for ECP to be restored
+            //mbSession.Write(":u:t 180,177,178,50,32,144,32,176,181,179,50,32,144,32,176,181,181,181 \n");
+
+            ////Set ROT/LIN value to 1 to use Limited Motion
+            //System.Threading.Thread.Sleep(1000);//wait for 1s
+            //mbSession.Write(":u:t 180,179,180,32,145,32,50,176,181,181,181 \n");
+
+            ////Set the Veloc/Accel Absolute Limits
+            //System.Threading.Thread.Sleep(1000);//wait for 1s
+            //mbSession.Write(":u:t 180,180,148,176,177,32,145,144,32,51,176,180,49,176,181,181,181,181 \n");
 
             //set the default mode to be position mode
             SelectMode(PositionMode);
 
-            //Set default limitations just after initialization, before all the other actions
-            SetAllLimits();//default values
+            ////Set default limitations just after initialization, before all the other actions
+            //SetAllLimits();//default values
 
-            MessageBox.Show("ECP has been set to 80 then 87; Analog input 1&2 gain has been set to 0; Default mode is Position Mode; All limits are set to default.");
+            //MessageBox.Show("ECP has been set to 80 then 87; Analog input 1&2 gain has been set to 0; ROT/LIN value set to 1 to use Limited Motion; Veloc/Accel Absolute Limits are default;  Default mode is Position Mode; All limits are set to default.");
+
             //Setup Ovariable
             //mbSession.Write(":c:o " + OvarMinPosLim + " , " + MinimunPositionLimit + " \n");
             //mbSession.Write(":c:o " + OvarMaxPosLim + " , " + MaximunPositionLimit + " \n");
@@ -129,6 +149,11 @@ namespace Acutrol
             targetComboBox.Items.Add("Rate Mode Accel Limit");
             targetComboBox.Items.Add("Synthesis Mode Velocity Limit");
             targetComboBox.Items.Add("Synthesis Mode Accel Limit");
+            targetComboBox.Items.Add("Abort Mode Velocity Limit");
+            targetComboBox.Items.Add("Abort Mode Accel Limit");
+            targetComboBox.Items.Add("Velocity Absolute Limit");
+            targetComboBox.Items.Add("Accel Absolute Limit");
+
         }
 
         private void comboBoxSelectMode_SelectedIndexChanged(object sender, EventArgs e)
@@ -184,7 +209,7 @@ namespace Acutrol
             if (mbSession == null)
                 return;
 
-            // Toggle the hardware GPIB REN line.
+            // Toggle the hardware GPIB REN line. Return to Local.
             GpibSession gpib = (GpibSession)mySession;
             gpib.ControlRen(RenMode.DeassertAfterGtl);
 
@@ -197,9 +222,16 @@ namespace Acutrol
         private void ShowFrameAxis()
         {
             string responseString = null;
-            responseString = ReadParameter(responseString, Position, textReadPos);   
+
+            responseString = ReadParameter(responseString, Position, textReadPos);
+            PosValArray[counter] = Convert.ToDouble(responseString);
+            
             responseString = ReadParameter(responseString, Rate, textReadRate);
             responseString = ReadParameter(responseString, Acceleration, textReadAcc);
+
+            counter++;
+
+            DisplayData();
             /*Read Ovariables*/
             //responseString = ReadOvarParameter(responseString, OvarMinPosLim, textBoxPosLimLow);
             //responseString = ReadOvarParameter(responseString, OvarMaxPosLim, textBoxPosLimHigh);
@@ -211,6 +243,27 @@ namespace Acutrol
             //responseString = ReadOvarParameter(responseString, OvarRateModeAccLim, textBoxRateModeAccLim); 
         }
 
+        private void DisplayData()
+        {
+            this.pos_chart.Series["PosVal"].Points.Clear();
+
+            if (counter >= DispLength)
+            {
+                for (disp = counter - (DispLength); disp < counter; disp++)
+                {
+                    this.pos_chart.Series["PosVal"].Points.AddXY((disp / 10).ToString(), PosValArray[disp]);
+                }
+            }
+            else
+            {
+                for (disp = 0; disp < DispLength; disp++)
+                {
+                    this.pos_chart.Series["PosVal"].Points.AddXY((disp / 10).ToString(), PosValArray[disp]);
+                }
+            }
+            
+                
+        }
         private string ReadParameter(string responseString, string targetParameter, TextBox targetTextBox)
         {
             try
@@ -255,7 +308,7 @@ namespace Acutrol
 
         private void ShowAxis_Tick(object sender, EventArgs e)
         {
-            //ShowFrameAxis();
+            ShowFrameAxis();
         }
 
         private void SetAxisParameters()
@@ -496,6 +549,23 @@ namespace Acutrol
                 {
                     mbSession.Write(":C:W " + windowNum + ", " + SynthesisModeAccelLimit + "  \n");
                 }
+                else if (targetComboBox.SelectedItem == "Abort Mode Velocity Limit")
+                {
+                    mbSession.Write(":C:W " + windowNum + ", " + AbortModeVelocityLimit + "  \n");
+                }
+                else if (targetComboBox.SelectedItem == "Abort Mode Accel Limit")
+                {
+                    mbSession.Write(":C:W " + windowNum + ", " + AbortModeAccelLimit +"  \n");
+                }
+                else if (targetComboBox.SelectedItem == "Velocity Absolute Limit")
+                {
+                    mbSession.Write(":C:W " + windowNum + ", " +VelocityAbsoluteLimit +"  \n");
+                }
+                else if (targetComboBox.SelectedItem == "Accel Absolute Limit")
+                {
+                    mbSession.Write(":C:W " + windowNum + ", " +AccelAbsoluteLimit +"  \n");
+                }
+
             }
             catch (VisaException v_exp)
             {
@@ -523,7 +593,8 @@ namespace Acutrol
             mbSession.Write(":C:W 2, " + MaximunPositionLimit + "  \n");
             mbSession.Write(":C:W 3, " + SynthesisModeVelocityLimit + "  \n");
             mbSession.Write(":C:W 4, " + SynthesisModeAccelLimit + "  \n");
-            mbSession.Write(":C:W 5, " + AbortModeVelocityLimit + "  \n");
+            //mbSession.Write(":C:W 5, " + AbortModeVelocityLimit + "  \n");
+            mbSession.Write(":C:W 5, " + VelocityAbsoluteLimit + "  \n");
             mbSession.Write(":C:W 6, " + AbortModeAccelLimit + "  \n");
             //mbSession.Write(":C:W 5, " + PositionModeVelocityLimit + "  \n");
             //mbSession.Write(":C:W 6, " + PositionModeAccelLimit + "  \n");
@@ -542,6 +613,43 @@ namespace Acutrol
         private void edit_default_button_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button_interlock_open_Click(object sender, EventArgs e)
+        {
+            if (mySession == null)
+                openMySession();
+
+            mbSession.Write(":I:O 1  \n");
+        }
+
+        private void button_interlock_reset_Click(object sender, EventArgs e)
+        {
+            if (mySession == null)
+                openMySession();
+
+            mbSession.Write(":I:R \n");
+        }
+
+        private void button_ECP_Click(object sender, EventArgs e)
+        {
+            if (mySession == null)
+                openMySession();
+            ////Setup ECP 80 then 87 using TOUCH commend
+            //mbSession.Write("u:t 179,179,176,32,152,144,32,50,176,181,176,32,152,151,32,50,176,181,181,181 \n");
+
+            //Setup ECP 87 using TOUCH commend
+            mbSession.Write("u:t 179,179,176,32,152,151,32,50,176,181,181,181 \n");
+            System.Threading.Thread.Sleep(5000);
+        }
+
+        private void button_cut_analog_input_Click(object sender, EventArgs e)
+        {
+            if (mySession == null)
+                openMySession();
+            //Set analog inputs gain to 0 
+            //System.Threading.Thread.Sleep(10000);//wait for 10s for ECP to be restored
+            mbSession.Write(":u:t 180,177,178,50,32,144,32,176,181,179,50,32,144,32,176,181,181,181 \n");
         }
 
     }
