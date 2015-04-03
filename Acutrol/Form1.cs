@@ -21,7 +21,7 @@ namespace Acutrol
      * 1.setup abs limits (1140,1141) and ROT/LIN
      * 2.reset all the limits according to charley and LabView
      * 3.auto execute: close - pos mode go to zero - syn mode 20 cycles with 1Hz 15.9 degree, slow start and slow end - open
-     * 
+     * 4.debug ECP87 remote touch commend: not working correctly. But when using loc mode touch screen, it's working correct
      */
     
     public partial class Form1 : Form
@@ -32,6 +32,9 @@ namespace Acutrol
         MessageBasedSession mbSession = null;
         //Open a generic Session first
         Session mySession = null;
+
+        double posReadValue = 1000;//used to check if position has been set back to zero position
+        int cycleCounter = 0;//used for synthesis mode counting cycles
 
         //Machine representation codes
         String Position = "P";
@@ -67,6 +70,7 @@ namespace Acutrol
         String AbortModeAccelLimit = "1160";
         String VelocityAbsoluteLimit = "1140";
         String AccelAbsoluteLimit = "1141";
+        String RateTripLimit = "1146";
 
         double[] PosValArray = new double[100000]; //array used to store position values
         int disp = 0; //counter used for display data
@@ -153,6 +157,7 @@ namespace Acutrol
             targetComboBox.Items.Add("Abort Mode Accel Limit");
             targetComboBox.Items.Add("Velocity Absolute Limit");
             targetComboBox.Items.Add("Accel Absolute Limit");
+            targetComboBox.Items.Add("Rate Trip Limit");
 
         }
 
@@ -224,6 +229,7 @@ namespace Acutrol
             string responseString = null;
 
             responseString = ReadParameter(responseString, Position, textReadPos);
+            posReadValue = Convert.ToDouble(responseString);
             PosValArray[counter] = Convert.ToDouble(responseString);
             
             responseString = ReadParameter(responseString, Rate, textReadRate);
@@ -425,8 +431,12 @@ namespace Acutrol
             mbSession.Write(":L :R " + SynthesisMode + " 1 " + textBoxLimitRate.Text.ToString() + " \n");
             mbSession.Write(":L :A " + SynthesisMode + " 1 " + textBoxLimitAcc.Text.ToString() + " \n");
 
-            mbSession.Write(":L :R " + AbortMode + " 1 " + textBoxLimitRate.Text.ToString() + " \n");
-            mbSession.Write(":L :A " + AbortMode + " 1 " + textBoxLimitAcc.Text.ToString() + " \n");
+            mbSession.Write(":L :R " + AbortMode + " 1 " + textBoxAbortRateLmt.Text.ToString() + " \n");
+            mbSession.Write(":L :A " + AbortMode + " 1 " + textBoxAbortAccLmt.Text.ToString() + " \n");
+
+            mbSession.Write(":L :V " + PositionMode + " 1 " + textBoxVTripLmt.Text.ToString() + " \n");
+            mbSession.Write(":L :V " + RateMode + " 1 " + textBoxVTripLmt.Text.ToString() + " \n");
+            mbSession.Write(":L :V " + SynthesisMode + " 1 " + textBoxVTripLmt.Text.ToString() + " \n");
 
         }
 
@@ -565,6 +575,10 @@ namespace Acutrol
                 {
                     mbSession.Write(":C:W " + windowNum + ", " +AccelAbsoluteLimit +"  \n");
                 }
+                else if (targetComboBox.SelectedItem == "Rate Trip Limit")
+                {
+                    mbSession.Write(":C:W " + windowNum + ", " + RateTripLimit + "  \n");
+                }
 
             }
             catch (VisaException v_exp)
@@ -590,7 +604,8 @@ namespace Acutrol
         private void button_showLimits_Click(object sender, EventArgs e)
         {
             mbSession.Write(":C:W 1, " + MinimunPositionLimit + "  \n");
-            mbSession.Write(":C:W 2, " + MaximunPositionLimit + "  \n");
+            //mbSession.Write(":C:W 2, " + MaximunPositionLimit + "  \n");
+            mbSession.Write(":C:W 2, " + RateTripLimit + "  \n");
             mbSession.Write(":C:W 3, " + SynthesisModeVelocityLimit + "  \n");
             mbSession.Write(":C:W 4, " + SynthesisModeAccelLimit + "  \n");
             //mbSession.Write(":C:W 5, " + AbortModeVelocityLimit + "  \n");
@@ -617,10 +632,28 @@ namespace Acutrol
 
         private void button_interlock_open_Click(object sender, EventArgs e)
         {
+            Interlock_Open();
+        }
+
+        private void Interlock_Open()
+        {
             if (mySession == null)
                 openMySession();
 
             mbSession.Write(":I:O 1  \n");
+        }
+
+        private void button_interlock_close_Click(object sender, EventArgs e)
+        {
+            Interlock_Close();
+        }
+
+        private void Interlock_Close()
+        {
+            if (mySession == null)
+                openMySession();
+
+            mbSession.Write(":I:C 1  \n");
         }
 
         private void button_interlock_reset_Click(object sender, EventArgs e)
@@ -652,5 +685,62 @@ namespace Acutrol
             mbSession.Write(":u:t 180,177,178,50,32,144,32,176,181,179,50,32,144,32,176,181,181,181 \n");
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Set all limitations
+            SetAllLimits();
+
+            //Go back to zero position under position mode
+            SelectMode(PositionMode);
+            textBoxSetPos.Text = "0";
+            CommendParameter(Position, textBoxSetPos);
+            Interlock_Close();
+
+            CheckZeroPosition.Enabled = true;
+
+            //cycleCounter = 0;
+            //System.Timers.Timer t = new System.Timers.Timer(1000);
+            //t.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
+            //t.AutoReset = true; // false:execute only once. true: keep execute
+            //t.Enabled = true;
+
+        }
+
+        private void updateLimits(String newRateLimit, String newAccLimit){
+            textBoxLimitRate.Text = newRateLimit;
+            textBoxLimitAcc.Text = newAccLimit;
+            SetAllLimits();
+        }
+
+        private void CheckZeroPosition_Tick(object sender, EventArgs e)
+        {
+            if (Math.Abs(posReadValue) < 0.001)
+            {
+
+            //    SelectMode(SynthesisMode);
+            //    updateLimits("150", "1200");
+            //    textBoxSetMagn.Text = "15.9";
+            //    textBoxSetFreq.Text = "1";
+            //    CommendSinusoidal();
+
+            //    if(cycleCounter==10){
+            //        textBoxSetMagn.Text = "0";
+            //        CommendSinusoidal();
+            //        if(){
+            Interlock_Open();
+            //            updateLimits("20", "50");
+            CheckZeroPosition.Enabled = false;
+            //        }
+
+                //}
+
+            }
+        }
+
+        private void theCount(object source, System.Timers.ElapsedEventArgs e)
+        {
+            cycleCounter++;
+            //textBox_cycle_counter.Text = cycleCounter.ToString();
+        }
     }
 }
