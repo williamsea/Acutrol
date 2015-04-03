@@ -236,8 +236,10 @@ namespace Acutrol
             responseString = ReadParameter(responseString, Acceleration, textReadAcc);
 
             counter++;
-
             DisplayData();
+
+            //display cycle counts
+            textBox_cycle_counter.Text = cycleCounter.ToString();
             /*Read Ovariables*/
             //responseString = ReadOvarParameter(responseString, OvarMinPosLim, textBoxPosLimLow);
             //responseString = ReadOvarParameter(responseString, OvarMaxPosLim, textBoxPosLimHigh);
@@ -698,11 +700,11 @@ namespace Acutrol
 
             CheckZeroPosition.Enabled = true;
 
-            //cycleCounter = 0;
-            //System.Timers.Timer t = new System.Timers.Timer(1000);
-            //t.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
-            //t.AutoReset = true; // false:execute only once. true: keep execute
-            //t.Enabled = true;
+            cycleCounter = 0;
+            System.Timers.Timer t = new System.Timers.Timer(1000);
+            t.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
+            t.AutoReset = true; // false:execute only once. true: keep execute
+            t.Enabled = true;
 
         }
 
@@ -714,7 +716,8 @@ namespace Acutrol
 
         private void CheckZeroPosition_Tick(object sender, EventArgs e)
         {
-            if (Math.Abs(posReadValue) < 0.001)
+            
+            if (Math.Abs(posReadValue) < 0.1)
             {
 
             //    SelectMode(SynthesisMode);
@@ -740,7 +743,6 @@ namespace Acutrol
         private void theCount(object source, System.Timers.ElapsedEventArgs e)
         {
             cycleCounter++;
-            //textBox_cycle_counter.Text = cycleCounter.ToString();
         }
     }
 }
