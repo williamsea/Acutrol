@@ -693,8 +693,8 @@ namespace Acutrol
             SetAllLimits();
 
             //Go back to zero position under position mode
+            textBoxSetPos.Text = "0"; //need to set earlier before commend, it takes some time to write
             SelectMode(PositionMode);
-            textBoxSetPos.Text = "0";
             CommendParameter(Position, textBoxSetPos);
             Interlock_Close();
 
@@ -720,22 +720,15 @@ namespace Acutrol
             if (Math.Abs(posReadValue) < 0.1)
             {
 
-            //    SelectMode(SynthesisMode);
-            //    updateLimits("150", "1200");
-            //    textBoxSetMagn.Text = "15.9";
-            //    textBoxSetFreq.Text = "1";
-            //    CommendSinusoidal();
+                SelectMode(SynthesisMode);
+                textBoxSetMagn.Text = "15.9";//need to set earlier before commmend, it takes some time to write
+                textBoxSetFreq.Text = "1";
+                //System.Threading.Thread.Sleep(1000);
+                updateLimits("150", "1200");
+                CommendSinusoidal();
 
-            //    if(cycleCounter==10){
-            //        textBoxSetMagn.Text = "0";
-            //        CommendSinusoidal();
-            //        if(){
-            Interlock_Open();
-            //            updateLimits("20", "50");
-            CheckZeroPosition.Enabled = false;
-            //        }
-
-                //}
+                CheckZeroPosition.Enabled = false;
+                CheckCycleCount.Enabled = true;
 
             }
         }
@@ -743,6 +736,20 @@ namespace Acutrol
         private void theCount(object source, System.Timers.ElapsedEventArgs e)
         {
             cycleCounter++;
+        }
+
+        private void CheckCycleCount_Tick(object sender, EventArgs e)
+        {
+                if(cycleCounter==20){
+                    textBoxSetMagn.Text = "0";
+                    CommendSinusoidal();
+                }
+                if (cycleCounter == 26)
+                {
+                    Interlock_Open();
+                    updateLimits("20", "50");
+                    CheckCycleCount.Enabled = false;
+                }
         }
     }
 }
