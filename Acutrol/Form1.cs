@@ -34,8 +34,10 @@ namespace Acutrol
         Session mySession = null;
 
         double posReadValue = 1000;//used to check if position has been set back to zero position
-        int cycleCounter = 0;//used for synthesis mode counting cycles
-        int targetCycleCount = 0;
+        double cycleCounter = 0;//used for synthesis mode counting cycles
+        double targetCycleCount = 0;
+        double targetFreq = 0;
+        System.Timers.Timer t;
 
         //Machine representation codes
         String Position = "P";
@@ -78,7 +80,6 @@ namespace Acutrol
         int counter = 0; //counter used to store data array
         int DispLength = 300; //30s
 
-        System.Timers.Timer t = new System.Timers.Timer(1000);
 
         public Form1()
         {
@@ -133,9 +134,6 @@ namespace Acutrol
             //mbSession.Write(":c:o " + OvarRateModeVeloLim + " , " + RateModeVelocityLimit + " \n");
             //mbSession.Write(":c:o " + OvarRateModeAccLim + " , " + RateModeAccelLimit + " \n");
 
-
-            t.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
-            t.AutoReset = true; // false:execute only once. true: keep execute
         }
 
         private void initComboBoxWindows(ComboBox targetComboBox)
@@ -718,13 +716,19 @@ namespace Acutrol
         private void CheckZeroPosition_Tick(object sender, EventArgs e)
         {
             
-            if (Math.Abs(posReadValue) < 0.1)
+            if (Math.Abs(posReadValue) < 0.01)
             {
-
                 SelectMode(SynthesisMode); comboBoxSelectMode.Text = "Synthesis Mode";
                 textBoxSetMagn.Text = textBoxSeqMag1.Text;//need to set earlier before commmend, it takes some time to write
                 textBoxSetFreq.Text = textBoxSeqFreq1.Text;
-                targetCycleCount = Convert.ToInt32(textBoxSeqCycle1.Text);
+                targetFreq = Convert.ToDouble(textBoxSeqFreq1.Text);
+
+                //set up the timer used for cycle counting based on target frequency
+                t = new System.Timers.Timer(1000 / targetFreq); //so that the time interval = 1/f (sec)
+                t.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
+                t.AutoReset = true; // false:execute only once. true: keep execute
+
+                targetCycleCount = Convert.ToDouble(textBoxSeqCycle1.Text);
                 updateLimits("150", "1200");
                 System.Threading.Thread.Sleep(50);//wait for calculation and write
                 CommendSinusoidal();
@@ -732,30 +736,42 @@ namespace Acutrol
                 CheckZeroPosition.Enabled = false;
                 CheckCycleCount.Enabled = true;
                 t.Enabled = true;
-
             }
         }
 
         private void theCount(object source, System.Timers.ElapsedEventArgs e)
         {
-            cycleCounter++;
+            cycleCounter++; //increased by one in every time interval = 1/f (sec)
         }
 
         private void CheckCycleCount_Tick(object sender, EventArgs e)
         {
-            if (cycleCounter == targetCycleCount-5)
+            if (cycleCounter == targetCycleCount - 5)//start slowing down 5 cycles before finishing
             {
                     textBoxSetMagn.Text = "0";
                     CommendSinusoidal();
                 }
             if (cycleCounter == targetCycleCount)
                 {
-                    Interlock_Open();
-                    t.Enabled = false;
+                    //go back to zero position again
+                    textBoxSetPos.Text = "0";
                     updateLimits("20", "50");
-                    CheckCycleCount.Enabled = false;
                     SelectMode(PositionMode); comboBoxSelectMode.Text = "Position Mode";
+                    t.Enabled = false;
+                    CheckCycleCount.Enabled = false;
+                    CommendParameter(Position, textBoxSetPos);
+
+                    ReturnZeroPosition.Enabled = true;
                 }
+        }
+
+        private void ReturnZeroPosition_Tick(object sender, EventArgs e)
+        {
+            if (Math.Abs(posReadValue) < 0.01)
+            {
+                Interlock_Open();
+                ReturnZeroPosition.Enabled = false;
+            }
         }
     }
 }
