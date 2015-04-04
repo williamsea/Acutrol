@@ -35,9 +35,11 @@ namespace Acutrol
 
         double posReadValue = 1000;//used to check if position has been set back to zero position
         double cycleCounter = 0;//used for synthesis mode counting cycles
-        double targetCycleCount = 0;
-        double targetFreq = 0;
+        double[] TargetCycleCount = new double[10];
+        double[] TargetMagn = new double[10];
+        double[] TargetFreq = new double[10];
         System.Timers.Timer t;
+        int seqCount = 0; //count the sequence to be executed
 
         //Machine representation codes
         String Position = "P";
@@ -693,6 +695,16 @@ namespace Acutrol
 
         private void buttonSinuSeqExecute_Click(object sender, EventArgs e)
         {
+            TargetMagn[0] = Convert.ToDouble(textBoxSeqMag1.Text);
+            TargetMagn[1] = Convert.ToDouble(textBoxSeqMag2.Text);
+            TargetMagn[2] = Convert.ToDouble(textBoxSeqMag3.Text);
+            TargetFreq[0] = Convert.ToDouble(textBoxSeqFreq1.Text);
+            TargetFreq[1] = Convert.ToDouble(textBoxSeqFreq2.Text);
+            TargetFreq[2] = Convert.ToDouble(textBoxSeqFreq3.Text);
+            TargetCycleCount[0] = Convert.ToDouble(textBoxSeqCycle1.Text);
+            TargetCycleCount[1] = Convert.ToDouble(textBoxSeqCycle2.Text);
+            TargetCycleCount[2] = Convert.ToDouble(textBoxSeqCycle3.Text);
+
             //Set all limitations
             SetAllLimits();
 
@@ -702,7 +714,7 @@ namespace Acutrol
             CommendParameter(Position, textBoxSetPos);
             Interlock_Close();
 
-            CheckZeroPosition.Enabled = true;
+            CheckZeroPosition.Enabled = true; //Once go back to zero, start sinusoidal cycles
 
             cycleCounter = 0;
         }
@@ -715,20 +727,23 @@ namespace Acutrol
 
         private void CheckZeroPosition_Tick(object sender, EventArgs e)
         {
+            ExecuteOneSequence(TargetMagn[seqCount], TargetMagn[seqCount]);
+        }
+
+        private void ExecuteOneSequence(double targetMagn, double targetFreq)
+        {
             
             if (Math.Abs(posReadValue) < 0.01)
             {
                 SelectMode(SynthesisMode); comboBoxSelectMode.Text = "Synthesis Mode";
-                textBoxSetMagn.Text = textBoxSeqMag1.Text;//need to set earlier before commmend, it takes some time to write
-                textBoxSetFreq.Text = textBoxSeqFreq1.Text;
-                targetFreq = Convert.ToDouble(textBoxSeqFreq1.Text);
+                textBoxSetMagn.Text = targetMagn.ToString();//need to set earlier before commmend, it takes some time to write
+                textBoxSetFreq.Text = targetFreq.ToString();
 
                 //set up the timer used for cycle counting based on target frequency
                 t = new System.Timers.Timer(1000 / targetFreq); //so that the time interval = 1/f (sec)
                 t.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
                 t.AutoReset = true; // false:execute only once. true: keep execute
 
-                targetCycleCount = Convert.ToDouble(textBoxSeqCycle1.Text);
                 updateLimits("150", "1200");
                 System.Threading.Thread.Sleep(50);//wait for calculation and write
                 CommendSinusoidal();
@@ -746,28 +761,36 @@ namespace Acutrol
 
         private void CheckCycleCount_Tick(object sender, EventArgs e)
         {
-            if (cycleCounter == targetCycleCount - 5)//start slowing down 5 cycles before finishing
+            if (cycleCounter == TargetCycleCount[seqCount] - 5)//start slowing down 5 cycles before finishing
             {
-                    textBoxSetMagn.Text = "0";
-                    CommendSinusoidal();
-                }
-            if (cycleCounter == targetCycleCount)
-                {
-                    //go back to zero position again
-                    textBoxSetPos.Text = "0";
-                    updateLimits("20", "50");
-                    SelectMode(PositionMode); comboBoxSelectMode.Text = "Position Mode";
-                    t.Enabled = false;
-                    CheckCycleCount.Enabled = false;
-                    CommendParameter(Position, textBoxSetPos);
+                textBoxSetMagn.Text = "0";
+                CommendSinusoidal();
+            }
+            if (cycleCounter == TargetCycleCount[seqCount])
+            {
+                //go back to zero position again
+                textBoxSetPos.Text = "0";
+                updateLimits("20", "50");
+                SelectMode(PositionMode); comboBoxSelectMode.Text = "Position Mode";
+                t.Enabled = false;
+                CheckCycleCount.Enabled = false;
+                CommendParameter(Position, textBoxSetPos);
 
-                    ReturnZeroPosition.Enabled = true;
-                }
+                ReturnZeroPosition.Enabled = true;
+            }
         }
 
         private void ReturnZeroPosition_Tick(object sender, EventArgs e)
         {
-            if (Math.Abs(posReadValue) < 0.01)
+            if (seqCount < 3 && Math.Abs(posReadValue) < 0.01)
+            {
+                seqCount++;
+                cycleCounter = 0;
+                CheckZeroPosition.Enabled = true;
+                ReturnZeroPosition.Enabled = false;
+            }
+
+            if (seqCount == 3 && Math.Abs(posReadValue) < 0.01)
             {
                 Interlock_Open();
                 ReturnZeroPosition.Enabled = false;
