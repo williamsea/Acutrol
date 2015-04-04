@@ -35,6 +35,7 @@ namespace Acutrol
 
         double posReadValue = 1000;//used to check if position has been set back to zero position
         int cycleCounter = 0;//used for synthesis mode counting cycles
+        int targetCycleCount = 0;
 
         //Machine representation codes
         String Position = "P";
@@ -77,6 +78,7 @@ namespace Acutrol
         int counter = 0; //counter used to store data array
         int DispLength = 300; //30s
 
+        System.Timers.Timer t = new System.Timers.Timer(1000);
 
         public Form1()
         {
@@ -130,6 +132,10 @@ namespace Acutrol
             //mbSession.Write(":c:o " + OvarPosModeAccLim + " , " + PositionModeAccelLimit + " \n");
             //mbSession.Write(":c:o " + OvarRateModeVeloLim + " , " + RateModeVelocityLimit + " \n");
             //mbSession.Write(":c:o " + OvarRateModeAccLim + " , " + RateModeAccelLimit + " \n");
+
+
+            t.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
+            t.AutoReset = true; // false:execute only once. true: keep execute
         }
 
         private void initComboBoxWindows(ComboBox targetComboBox)
@@ -687,7 +693,7 @@ namespace Acutrol
             mbSession.Write(":u:t 180,177,178,50,32,144,32,176,181,179,50,32,144,32,176,181,181,181 \n");
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonSinuSeqExecute_Click(object sender, EventArgs e)
         {
             //Set all limitations
             SetAllLimits();
@@ -701,11 +707,6 @@ namespace Acutrol
             CheckZeroPosition.Enabled = true;
 
             cycleCounter = 0;
-            System.Timers.Timer t = new System.Timers.Timer(1000);
-            t.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
-            t.AutoReset = true; // false:execute only once. true: keep execute
-            t.Enabled = true;
-
         }
 
         private void updateLimits(String newRateLimit, String newAccLimit){
@@ -720,15 +721,17 @@ namespace Acutrol
             if (Math.Abs(posReadValue) < 0.1)
             {
 
-                SelectMode(SynthesisMode);
-                textBoxSetMagn.Text = "15.9";//need to set earlier before commmend, it takes some time to write
-                textBoxSetFreq.Text = "1";
-                //System.Threading.Thread.Sleep(1000);
+                SelectMode(SynthesisMode); comboBoxSelectMode.Text = "Synthesis Mode";
+                textBoxSetMagn.Text = textBoxSeqMag1.Text;//need to set earlier before commmend, it takes some time to write
+                textBoxSetFreq.Text = textBoxSeqFreq1.Text;
+                targetCycleCount = Convert.ToInt32(textBoxSeqCycle1.Text);
                 updateLimits("150", "1200");
+                System.Threading.Thread.Sleep(50);//wait for calculation and write
                 CommendSinusoidal();
 
                 CheckZeroPosition.Enabled = false;
                 CheckCycleCount.Enabled = true;
+                t.Enabled = true;
 
             }
         }
@@ -740,15 +743,18 @@ namespace Acutrol
 
         private void CheckCycleCount_Tick(object sender, EventArgs e)
         {
-                if(cycleCounter==20){
+            if (cycleCounter == targetCycleCount-5)
+            {
                     textBoxSetMagn.Text = "0";
                     CommendSinusoidal();
                 }
-                if (cycleCounter == 26)
+            if (cycleCounter == targetCycleCount)
                 {
                     Interlock_Open();
+                    t.Enabled = false;
                     updateLimits("20", "50");
                     CheckCycleCount.Enabled = false;
+                    SelectMode(PositionMode); comboBoxSelectMode.Text = "Position Mode";
                 }
         }
     }

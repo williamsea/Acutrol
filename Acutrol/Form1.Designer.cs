@@ -141,10 +141,28 @@
             this.button_cut_analog_input = new System.Windows.Forms.Button();
             this.pos_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button_interlock_close = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonSinuSeqExecute = new System.Windows.Forms.Button();
             this.textBox_cycle_counter = new System.Windows.Forms.TextBox();
             this.CheckZeroPosition = new System.Windows.Forms.Timer(this.components);
             this.CheckCycleCount = new System.Windows.Forms.Timer(this.components);
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label64 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.textBoxSeqCycle1 = new System.Windows.Forms.TextBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.textBoxSeqMag1 = new System.Windows.Forms.TextBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.textBoxSeqFreq1 = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -152,6 +170,7 @@
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pos_chart)).BeginInit();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -274,7 +293,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(257, 107);
+            this.label33.Location = new System.Drawing.Point(257, 65);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(17, 13);
             this.label33.TabIndex = 16;
@@ -283,7 +302,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(185, 107);
+            this.label32.Location = new System.Drawing.Point(185, 65);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(18, 13);
             this.label32.TabIndex = 15;
@@ -291,42 +310,42 @@
             // 
             // textBoxRateModeAccLim
             // 
-            this.textBoxRateModeAccLim.Location = new System.Drawing.Point(201, 122);
+            this.textBoxRateModeAccLim.Location = new System.Drawing.Point(201, 80);
             this.textBoxRateModeAccLim.Name = "textBoxRateModeAccLim";
             this.textBoxRateModeAccLim.Size = new System.Drawing.Size(51, 20);
             this.textBoxRateModeAccLim.TabIndex = 14;
             // 
             // textBoxRateModeRateLim
             // 
-            this.textBoxRateModeRateLim.Location = new System.Drawing.Point(201, 100);
+            this.textBoxRateModeRateLim.Location = new System.Drawing.Point(201, 58);
             this.textBoxRateModeRateLim.Name = "textBoxRateModeRateLim";
             this.textBoxRateModeRateLim.Size = new System.Drawing.Size(51, 20);
             this.textBoxRateModeRateLim.TabIndex = 13;
             // 
             // textBoxPosModeAccLim
             // 
-            this.textBoxPosModeAccLim.Location = new System.Drawing.Point(132, 122);
+            this.textBoxPosModeAccLim.Location = new System.Drawing.Point(132, 80);
             this.textBoxPosModeAccLim.Name = "textBoxPosModeAccLim";
             this.textBoxPosModeAccLim.Size = new System.Drawing.Size(51, 20);
             this.textBoxPosModeAccLim.TabIndex = 12;
             // 
             // textBoxPosModeRateLim
             // 
-            this.textBoxPosModeRateLim.Location = new System.Drawing.Point(132, 100);
+            this.textBoxPosModeRateLim.Location = new System.Drawing.Point(132, 58);
             this.textBoxPosModeRateLim.Name = "textBoxPosModeRateLim";
             this.textBoxPosModeRateLim.Size = new System.Drawing.Size(51, 20);
             this.textBoxPosModeRateLim.TabIndex = 11;
             // 
             // textBoxPosLimHigh
             // 
-            this.textBoxPosLimHigh.Location = new System.Drawing.Point(165, 73);
+            this.textBoxPosLimHigh.Location = new System.Drawing.Point(165, 31);
             this.textBoxPosLimHigh.Name = "textBoxPosLimHigh";
             this.textBoxPosLimHigh.Size = new System.Drawing.Size(44, 20);
             this.textBoxPosLimHigh.TabIndex = 10;
             // 
             // textBoxSynModeAccLim
             // 
-            this.textBoxSynModeAccLim.Location = new System.Drawing.Point(273, 122);
+            this.textBoxSynModeAccLim.Location = new System.Drawing.Point(273, 80);
             this.textBoxSynModeAccLim.Name = "textBoxSynModeAccLim";
             this.textBoxSynModeAccLim.Size = new System.Drawing.Size(51, 20);
             this.textBoxSynModeAccLim.TabIndex = 5;
@@ -334,7 +353,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(109, 107);
+            this.label31.Location = new System.Drawing.Point(109, 65);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(17, 13);
             this.label31.TabIndex = 2;
@@ -343,7 +362,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(15, 76);
+            this.label28.Location = new System.Drawing.Point(15, 34);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(76, 13);
             this.label28.TabIndex = 2;
@@ -352,7 +371,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(13, 122);
+            this.label29.Location = new System.Drawing.Point(13, 80);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(93, 13);
             this.label29.TabIndex = 8;
@@ -360,7 +379,7 @@
             // 
             // textBoxPosLimLow
             // 
-            this.textBoxPosLimLow.Location = new System.Drawing.Point(112, 73);
+            this.textBoxPosLimLow.Location = new System.Drawing.Point(112, 31);
             this.textBoxPosLimLow.Name = "textBoxPosLimLow";
             this.textBoxPosLimLow.Size = new System.Drawing.Size(41, 20);
             this.textBoxPosLimLow.TabIndex = 3;
@@ -368,7 +387,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(13, 103);
+            this.label30.Location = new System.Drawing.Point(13, 61);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(57, 13);
             this.label30.TabIndex = 7;
@@ -376,7 +395,7 @@
             // 
             // textBoxSynModeRateLim
             // 
-            this.textBoxSynModeRateLim.Location = new System.Drawing.Point(273, 100);
+            this.textBoxSynModeRateLim.Location = new System.Drawing.Point(273, 58);
             this.textBoxSynModeRateLim.Name = "textBoxSynModeRateLim";
             this.textBoxSynModeRateLim.Size = new System.Drawing.Size(51, 20);
             this.textBoxSynModeRateLim.TabIndex = 4;
@@ -1105,16 +1124,16 @@
             this.panel6.Controls.Add(this.textBoxPosLimHigh);
             this.panel6.Controls.Add(this.label31);
             this.panel6.Controls.Add(this.textBoxSynModeAccLim);
-            this.panel6.Location = new System.Drawing.Point(48, 534);
+            this.panel6.Location = new System.Drawing.Point(433, 628);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(338, 203);
+            this.panel6.Size = new System.Drawing.Size(272, 104);
             this.panel6.TabIndex = 10;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(3, 10);
+            this.label27.Location = new System.Drawing.Point(13, 8);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(160, 13);
             this.label27.TabIndex = 9;
@@ -1206,21 +1225,21 @@
             this.button_interlock_close.UseVisualStyleBackColor = true;
             this.button_interlock_close.Click += new System.EventHandler(this.button_interlock_close_Click);
             // 
-            // button2
+            // buttonSinuSeqExecute
             // 
-            this.button2.Location = new System.Drawing.Point(488, 586);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(111, 23);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "15.9 degree 1Hz";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonSinuSeqExecute.Location = new System.Drawing.Point(275, 173);
+            this.buttonSinuSeqExecute.Name = "buttonSinuSeqExecute";
+            this.buttonSinuSeqExecute.Size = new System.Drawing.Size(67, 23);
+            this.buttonSinuSeqExecute.TabIndex = 26;
+            this.buttonSinuSeqExecute.Text = "Execute";
+            this.buttonSinuSeqExecute.UseVisualStyleBackColor = true;
+            this.buttonSinuSeqExecute.Click += new System.EventHandler(this.buttonSinuSeqExecute_Click);
             // 
             // textBox_cycle_counter
             // 
-            this.textBox_cycle_counter.Location = new System.Drawing.Point(499, 630);
+            this.textBox_cycle_counter.Location = new System.Drawing.Point(97, 33);
             this.textBox_cycle_counter.Name = "textBox_cycle_counter";
-            this.textBox_cycle_counter.Size = new System.Drawing.Size(100, 20);
+            this.textBox_cycle_counter.Size = new System.Drawing.Size(51, 20);
             this.textBox_cycle_counter.TabIndex = 29;
             // 
             // CheckZeroPosition
@@ -1231,13 +1250,177 @@
             // 
             this.CheckCycleCount.Tick += new System.EventHandler(this.CheckCycleCount_Tick);
             // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.label64);
+            this.panel7.Controls.Add(this.textBox7);
+            this.panel7.Controls.Add(this.textBox8);
+            this.panel7.Controls.Add(this.textBox9);
+            this.panel7.Controls.Add(this.label63);
+            this.panel7.Controls.Add(this.textBox4);
+            this.panel7.Controls.Add(this.textBox5);
+            this.panel7.Controls.Add(this.textBox6);
+            this.panel7.Controls.Add(this.label62);
+            this.panel7.Controls.Add(this.label61);
+            this.panel7.Controls.Add(this.textBoxSeqCycle1);
+            this.panel7.Controls.Add(this.label60);
+            this.panel7.Controls.Add(this.textBoxSeqMag1);
+            this.panel7.Controls.Add(this.label59);
+            this.panel7.Controls.Add(this.textBoxSeqFreq1);
+            this.panel7.Controls.Add(this.label57);
+            this.panel7.Controls.Add(this.label58);
+            this.panel7.Controls.Add(this.textBox_cycle_counter);
+            this.panel7.Controls.Add(this.buttonSinuSeqExecute);
+            this.panel7.Location = new System.Drawing.Point(48, 553);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(352, 199);
+            this.panel7.TabIndex = 17;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(1, 139);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(16, 13);
+            this.label64.TabIndex = 44;
+            this.label64.Text = "3:";
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(206, 135);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(51, 20);
+            this.textBox7.TabIndex = 43;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(21, 136);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(51, 20);
+            this.textBox8.TabIndex = 42;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(112, 135);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(51, 20);
+            this.textBox9.TabIndex = 41;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(1, 113);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(16, 13);
+            this.label63.TabIndex = 40;
+            this.label63.Text = "2:";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(206, 109);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(51, 20);
+            this.textBox4.TabIndex = 39;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(21, 110);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(51, 20);
+            this.textBox5.TabIndex = 38;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(112, 109);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(51, 20);
+            this.textBox6.TabIndex = 37;
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(1, 87);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(16, 13);
+            this.label62.TabIndex = 36;
+            this.label62.Text = "1:";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(197, 65);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(78, 13);
+            this.label61.TabIndex = 35;
+            this.label61.Text = "Num of Cycles:";
+            // 
+            // textBoxSeqCycle1
+            // 
+            this.textBoxSeqCycle1.Location = new System.Drawing.Point(206, 83);
+            this.textBoxSeqCycle1.Name = "textBoxSeqCycle1";
+            this.textBoxSeqCycle1.Size = new System.Drawing.Size(51, 20);
+            this.textBoxSeqCycle1.TabIndex = 34;
+            this.textBoxSeqCycle1.Text = "20";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(109, 65);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(82, 13);
+            this.label60.TabIndex = 32;
+            this.label60.Text = "Frequency (Hz):";
+            // 
+            // textBoxSeqMag1
+            // 
+            this.textBoxSeqMag1.Location = new System.Drawing.Point(21, 84);
+            this.textBoxSeqMag1.Name = "textBoxSeqMag1";
+            this.textBoxSeqMag1.Size = new System.Drawing.Size(51, 20);
+            this.textBoxSeqMag1.TabIndex = 33;
+            this.textBoxSeqMag1.Text = "15.9";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(19, 65);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(89, 13);
+            this.label59.TabIndex = 30;
+            this.label59.Text = "Magnitude (Deg):";
+            // 
+            // textBoxSeqFreq1
+            // 
+            this.textBoxSeqFreq1.Location = new System.Drawing.Point(112, 83);
+            this.textBoxSeqFreq1.Name = "textBoxSeqFreq1";
+            this.textBoxSeqFreq1.Size = new System.Drawing.Size(51, 20);
+            this.textBoxSeqFreq1.TabIndex = 31;
+            this.textBoxSeqFreq1.Text = "1";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(19, 37);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(72, 13);
+            this.label57.TabIndex = 17;
+            this.label57.Text = "Cycle Counts:";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label58.Location = new System.Drawing.Point(13, 8);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(140, 13);
+            this.label58.TabIndex = 9;
+            this.label58.Text = "Sinusoidal Sequences: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1096, 744);
-            this.Controls.Add(this.textBox_cycle_counter);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(1106, 808);
+            this.Controls.Add(this.panel7);
             this.Controls.Add(this.button_interlock_close);
             this.Controls.Add(this.pos_chart);
             this.Controls.Add(this.button_cut_analog_input);
@@ -1258,7 +1441,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = " ";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -1272,6 +1455,8 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pos_chart)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1388,10 +1573,28 @@
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.Button button_interlock_close;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonSinuSeqExecute;
         private System.Windows.Forms.TextBox textBox_cycle_counter;
         private System.Windows.Forms.Timer CheckZeroPosition;
         private System.Windows.Forms.Timer CheckCycleCount;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.TextBox textBoxSeqMag1;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.TextBox textBoxSeqFreq1;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.TextBox textBoxSeqCycle1;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox6;
     }
 }
 
