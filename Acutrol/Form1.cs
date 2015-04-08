@@ -661,6 +661,7 @@ namespace Acutrol
         private void button_interlock_open_Click(object sender, EventArgs e)
         {
             Interlock_Open();
+            RecordCtr = false;
         }
 
         private void Interlock_Open()

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowAxis = new System.Windows.Forms.Timer(this.components);
             this.textReadPos = new System.Windows.Forms.TextBox();
@@ -847,7 +847,7 @@
             this.panel5.Controls.Add(this.label21);
             this.panel5.Location = new System.Drawing.Point(711, 529);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(317, 203);
+            this.panel5.Size = new System.Drawing.Size(317, 196);
             this.panel5.TabIndex = 12;
             // 
             // button_showLimits
@@ -1030,31 +1030,31 @@
             // 
             // pos_chart
             // 
-            chartArea1.AxisX.MajorGrid.Enabled = false;
-            chartArea1.AxisX2.MajorGrid.Interval = 30D;
-            chartArea1.AxisY.Interval = 60D;
-            chartArea1.AxisY.MajorGrid.Interval = 60D;
-            chartArea1.AxisY.Maximum = 180D;
-            chartArea1.AxisY.Minimum = -180D;
-            chartArea1.CursorX.IsUserEnabled = true;
-            chartArea1.CursorX.IsUserSelectionEnabled = true;
-            chartArea1.Name = "ChartArea1";
-            this.pos_chart.ChartAreas.Add(chartArea1);
+            chartArea3.AxisX.MajorGrid.Enabled = false;
+            chartArea3.AxisX2.MajorGrid.Interval = 30D;
+            chartArea3.AxisY.Interval = 60D;
+            chartArea3.AxisY.MajorGrid.Interval = 60D;
+            chartArea3.AxisY.Maximum = 180D;
+            chartArea3.AxisY.Minimum = -180D;
+            chartArea3.CursorX.IsUserEnabled = true;
+            chartArea3.CursorX.IsUserSelectionEnabled = true;
+            chartArea3.Name = "ChartArea1";
+            this.pos_chart.ChartAreas.Add(chartArea3);
             this.pos_chart.Location = new System.Drawing.Point(48, 343);
             this.pos_chart.Name = "pos_chart";
             this.pos_chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
-            series1.BorderWidth = 3;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series1.IsXValueIndexed = true;
-            series1.Name = "PosVal";
-            this.pos_chart.Series.Add(series1);
+            series3.BorderWidth = 3;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series3.IsXValueIndexed = true;
+            series3.Name = "PosVal";
+            this.pos_chart.Series.Add(series3);
             this.pos_chart.Size = new System.Drawing.Size(990, 179);
             this.pos_chart.TabIndex = 27;
             this.pos_chart.Text = "pos_chart";
-            title1.Name = "Title1";
-            title1.Text = "Position";
-            this.pos_chart.Titles.Add(title1);
+            title3.Name = "Title1";
+            title3.Text = "Position";
+            this.pos_chart.Titles.Add(title3);
             // 
             // button_interlock_close
             // 
@@ -1116,7 +1116,7 @@
             this.panel7.Controls.Add(this.label58);
             this.panel7.Controls.Add(this.textBox_cycle_counter);
             this.panel7.Controls.Add(this.buttonSinuSeqExecute);
-            this.panel7.Location = new System.Drawing.Point(48, 553);
+            this.panel7.Location = new System.Drawing.Point(48, 529);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(352, 199);
             this.panel7.TabIndex = 17;
@@ -1300,7 +1300,7 @@
             this.panel6.Controls.Add(this.label27);
             this.panel6.Controls.Add(this.label28);
             this.panel6.Controls.Add(this.textBoxReadingDirectory);
-            this.panel6.Location = new System.Drawing.Point(406, 559);
+            this.panel6.Location = new System.Drawing.Point(409, 529);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(290, 144);
             this.panel6.TabIndex = 10;
