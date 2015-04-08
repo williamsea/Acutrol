@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.ShowAxis = new System.Windows.Forms.Timer(this.components);
             this.textReadPos = new System.Windows.Forms.TextBox();
@@ -145,6 +145,7 @@
             this.textBox_cycle_counter = new System.Windows.Forms.TextBox();
             this.CheckZeroPosition = new System.Windows.Forms.Timer(this.components);
             this.CheckCycleCount = new System.Windows.Forms.Timer(this.components);
+            this.ReturnZeroPosition = new System.Windows.Forms.Timer(this.components);
             this.panel7 = new System.Windows.Forms.Panel();
             this.label64 = new System.Windows.Forms.Label();
             this.textBoxSeqCycle3 = new System.Windows.Forms.TextBox();
@@ -163,7 +164,6 @@
             this.textBoxSeqFreq1 = new System.Windows.Forms.TextBox();
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
-            this.ReturnZeroPosition = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -1192,29 +1192,29 @@
             // 
             // pos_chart
             // 
-            chartArea2.AxisX.MajorGrid.Enabled = false;
-            chartArea2.AxisX2.MajorGrid.Interval = 30D;
-            chartArea2.AxisY.Interval = 60D;
-            chartArea2.AxisY.MajorGrid.Interval = 60D;
-            chartArea2.AxisY.Maximum = 180D;
-            chartArea2.AxisY.Minimum = -180D;
-            chartArea2.Name = "ChartArea1";
-            this.pos_chart.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX2.MajorGrid.Interval = 30D;
+            chartArea1.AxisY.Interval = 60D;
+            chartArea1.AxisY.MajorGrid.Interval = 60D;
+            chartArea1.AxisY.Maximum = 180D;
+            chartArea1.AxisY.Minimum = -180D;
+            chartArea1.Name = "ChartArea1";
+            this.pos_chart.ChartAreas.Add(chartArea1);
             this.pos_chart.Location = new System.Drawing.Point(48, 343);
             this.pos_chart.Name = "pos_chart";
             this.pos_chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
-            series2.BorderWidth = 3;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series2.IsXValueIndexed = true;
-            series2.Name = "PosVal";
-            this.pos_chart.Series.Add(series2);
+            series1.BorderWidth = 3;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series1.IsXValueIndexed = true;
+            series1.Name = "PosVal";
+            this.pos_chart.Series.Add(series1);
             this.pos_chart.Size = new System.Drawing.Size(990, 179);
             this.pos_chart.TabIndex = 27;
             this.pos_chart.Text = "pos_chart";
-            title2.Name = "Title1";
-            title2.Text = "Position";
-            this.pos_chart.Titles.Add(title2);
+            title1.Name = "Title1";
+            title1.Text = "Position";
+            this.pos_chart.Titles.Add(title1);
             // 
             // button_interlock_close
             // 
@@ -1250,6 +1250,10 @@
             // CheckCycleCount
             // 
             this.CheckCycleCount.Tick += new System.EventHandler(this.CheckCycleCount_Tick);
+            // 
+            // ReturnZeroPosition
+            // 
+            this.ReturnZeroPosition.Tick += new System.EventHandler(this.ReturnZeroPosition_Tick);
             // 
             // panel7
             // 
@@ -1421,10 +1425,6 @@
             this.label58.Size = new System.Drawing.Size(140, 13);
             this.label58.TabIndex = 9;
             this.label58.Text = "Sinusoidal Sequences: ";
-            // 
-            // ReturnZeroPosition
-            // 
-            this.ReturnZeroPosition.Tick += new System.EventHandler(this.ReturnZeroPosition_Tick);
             // 
             // Form1
             // 
@@ -1607,6 +1607,7 @@
         private System.Windows.Forms.TextBox textBoxSeqMag2;
         private System.Windows.Forms.TextBox textBoxSeqFreq2;
         private System.Windows.Forms.Timer ReturnZeroPosition;
+
     }
 }
 

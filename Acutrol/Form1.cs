@@ -18,12 +18,11 @@ namespace Acutrol
      * 1.Channel 1 is the only channel in use. So the default channel is channel 1.
      * 
      * TODO: 
-     * 1.setup abs limits (1140,1141) and ROT/LIN
-     * 2.reset all the limits according to charley and LabView
-     * 3.auto execute: close - pos mode go to zero - syn mode 20 cycles with 1Hz 15.9 degree, slow start and slow end - open
-     * 4.debug ECP87 remote touch commend: not working correctly. But when using loc mode touch screen, it's working correct
+     * 1.debug ECP87 remote touch commend: not working correctly. But when using loc mode touch screen, it's working correct
+     * 2.text or sth else data store and review (display)
+     * 3.setup abs limits (1140,1141) and ROT/LIN.
      */
-    
+
     public partial class Form1 : Form
     {
         //GPIB Connection string
@@ -35,11 +34,15 @@ namespace Acutrol
 
         double posReadValue = 1000;//used to check if position has been set back to zero position
         double cycleCounter = 0;//used for synthesis mode counting cycles
-        double[] TargetCycleCount = new double[10];
-        double[] TargetMagn = new double[10];
-        double[] TargetFreq = new double[10];
-        System.Timers.Timer t;
+        //List<double> TargetCycleCount = new List<double>();
+        //List<double> TargetMagn = new List<double>();
+        //List<double> TargetFreq = new List<double>();
+        double[] TargetCycleCount = new double[3] { 0, 0, 0 };//Must be initially Set to 0!!! Otherwise may cause problem!
+        double[] TargetMagn = new double[3] { 0, 0, 0 };
+        double[] TargetFreq = new double[3] { 0, 0, 0 };
+        System.Timers.Timer sysTimer;
         int seqCount = 0; //count the sequence to be executed
+        double zeroTrigger = 0.01;//0.01;
 
         //Machine representation codes
         String Position = "P";
@@ -727,22 +730,21 @@ namespace Acutrol
 
         private void CheckZeroPosition_Tick(object sender, EventArgs e)
         {
-            ExecuteOneSequence(TargetMagn[seqCount], TargetMagn[seqCount]);
+            ExecuteOneSequence(TargetMagn[seqCount], TargetFreq[seqCount]);
         }
 
         private void ExecuteOneSequence(double targetMagn, double targetFreq)
         {
-            
-            if (Math.Abs(posReadValue) < 0.01)
+            if (Math.Abs(posReadValue) < zeroTrigger)
             {
                 SelectMode(SynthesisMode); comboBoxSelectMode.Text = "Synthesis Mode";
                 textBoxSetMagn.Text = targetMagn.ToString();//need to set earlier before commmend, it takes some time to write
                 textBoxSetFreq.Text = targetFreq.ToString();
 
                 //set up the timer used for cycle counting based on target frequency
-                t = new System.Timers.Timer(1000 / targetFreq); //so that the time interval = 1/f (sec)
-                t.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
-                t.AutoReset = true; // false:execute only once. true: keep execute
+                sysTimer = new System.Timers.Timer(1000 / targetFreq); //so that the time interval = 1/f (sec)
+                sysTimer.Elapsed += new System.Timers.ElapsedEventHandler(theCount);
+                sysTimer.AutoReset = true; // false:execute only once. true: keep execute
 
                 updateLimits("150", "1200");
                 System.Threading.Thread.Sleep(50);//wait for calculation and write
@@ -750,8 +752,9 @@ namespace Acutrol
 
                 CheckZeroPosition.Enabled = false;
                 CheckCycleCount.Enabled = true;
-                t.Enabled = true;
+                sysTimer.Enabled = true;
             }
+
         }
 
         private void theCount(object source, System.Timers.ElapsedEventArgs e)
@@ -772,7 +775,7 @@ namespace Acutrol
                 textBoxSetPos.Text = "0";
                 updateLimits("20", "50");
                 SelectMode(PositionMode); comboBoxSelectMode.Text = "Position Mode";
-                t.Enabled = false;
+                sysTimer.Enabled = false;
                 CheckCycleCount.Enabled = false;
                 CommendParameter(Position, textBoxSetPos);
 
@@ -782,19 +785,21 @@ namespace Acutrol
 
         private void ReturnZeroPosition_Tick(object sender, EventArgs e)
         {
-            if (seqCount < 3 && Math.Abs(posReadValue) < 0.01)
+            if (seqCount < 3 && Math.Abs(posReadValue) < zeroTrigger)
             {
                 seqCount++;
                 cycleCounter = 0;
-                CheckZeroPosition.Enabled = true;
+                CheckZeroPosition.Enabled = true;//go to the next sequence
                 ReturnZeroPosition.Enabled = false;
             }
 
-            if (seqCount == 3 && Math.Abs(posReadValue) < 0.01)
+            if (seqCount == 3 && Math.Abs(posReadValue) < zeroTrigger)
             {
                 Interlock_Open();
+                CheckZeroPosition.Enabled = false;//no need to go back
                 ReturnZeroPosition.Enabled = false;
             }
         }
+
     }
 }
