@@ -44,7 +44,7 @@ namespace Acutrol
         double[] TargetFreq = new double[3] { 0, 0, 0 };
         System.Timers.Timer sysTimer;
         int seqCount = 0; //count the sequence to be executed
-        double zeroTrigger = 0.01;//0.01;
+        double zeroTrigger = 0.01;
 
         //Machine representation codes
         String Position = "P";
@@ -248,6 +248,7 @@ namespace Acutrol
 
             responseString = ReadParameter(responseString, Position, textReadPos);
             posReadValue = Convert.ToDouble(responseString);
+
             //record position into txt file
             if (RecordCtr == true)
             {
@@ -292,10 +293,9 @@ namespace Acutrol
                 {
                     this.pos_chart.Series["PosVal"].Points.AddXY((disp / 10).ToString(), PosValArray[disp]);
                 }
-            }
-            
-                
+            }  
         }
+
         private string ReadParameter(string responseString, string targetParameter, TextBox targetTextBox)
         {
             try
@@ -835,8 +835,61 @@ namespace Acutrol
                 RecordCtr = false;
                 streamWriter.Close();
                 fileStream.Close();
+                seqCount = 0;
             }
         }
 
+        private void button_select_file_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = savingPath;
+            openFileDialog.Filter = "txt Files(*.txt)|*.txt|All Files(*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                readingPath = openFileDialog.FileName;
+            }
+            textBoxReadingDirectory.Text = readingPath;
+            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+        }
+
+        private void button_display_file_Click(object sender, EventArgs e)
+        {
+            ShowAxis.Enabled = false;
+            if (textBoxReadingDirectory.Text != "")
+            {
+                readingPath = textBoxReadingDirectory.Text;
+                Read_Txt();
+            }
+            else
+                MessageBox.Show("Please input a path of data file!");
+        }
+
+        private void Read_Txt()
+        {
+            StreamReader sr = new StreamReader(readingPath, Encoding.Default);
+            string wholeString;
+            string[] readPosValArray;
+            Array.Clear(PosValArray, 0, PosValArray.Length);//clear original PosValArray
+            wholeString = sr.ReadToEnd();//generate a string containing all the info in the file
+            readPosValArray = wholeString.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);//split the whole string into a string array
+            PosValArray = Array.ConvertAll(readPosValArray, Double.Parse);//convert string[] to double[]
+            sr.Close();
+            DisplayFileData();
+        }
+        //display position in waveform format
+        private void DisplayFileData()
+        {
+            this.pos_chart.Series["PosVal"].Points.Clear();
+            for (disp = 0; disp < PosValArray.Length; disp++)
+            {
+                this.pos_chart.Series["PosVal"].Points.AddXY((disp / 10).ToString(), PosValArray[disp]);
+            }
+        }
+
+        private void button_return_realtime_Click(object sender, EventArgs e)
+        {
+            this.pos_chart.Series["PosVal"].Points.Clear();
+            ShowAxis.Enabled = true;
+        }
     }
 }

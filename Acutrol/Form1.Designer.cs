@@ -45,20 +45,6 @@
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.textBoxRateModeAccLim = new System.Windows.Forms.TextBox();
-            this.textBoxRateModeRateLim = new System.Windows.Forms.TextBox();
-            this.textBoxPosModeAccLim = new System.Windows.Forms.TextBox();
-            this.textBoxPosModeRateLim = new System.Windows.Forms.TextBox();
-            this.textBoxPosLimHigh = new System.Windows.Forms.TextBox();
-            this.textBoxSynModeAccLim = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.textBoxPosLimLow = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.textBoxSynModeRateLim = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label43 = new System.Windows.Forms.Label();
             this.ExecuteCommendButton = new System.Windows.Forms.Button();
@@ -132,9 +118,6 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label49 = new System.Windows.Forms.Label();
             this.button_interlock_open = new System.Windows.Forms.Button();
             this.button_interlock_reset = new System.Windows.Forms.Button();
             this.button_ECP = new System.Windows.Forms.Button();
@@ -164,14 +147,21 @@
             this.textBoxSeqFreq1 = new System.Windows.Forms.TextBox();
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
+            this.textBoxReadingDirectory = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.button_return_realtime = new System.Windows.Forms.Button();
+            this.button_display_file = new System.Windows.Forms.Button();
+            this.button_select_file = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pos_chart)).BeginInit();
             this.panel7.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -291,116 +281,6 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Parameter Readings:";
             // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(257, 65);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(17, 13);
-            this.label33.TabIndex = 16;
-            this.label33.Text = "S:";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(185, 65);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(18, 13);
-            this.label32.TabIndex = 15;
-            this.label32.Text = "R:";
-            // 
-            // textBoxRateModeAccLim
-            // 
-            this.textBoxRateModeAccLim.Location = new System.Drawing.Point(201, 80);
-            this.textBoxRateModeAccLim.Name = "textBoxRateModeAccLim";
-            this.textBoxRateModeAccLim.Size = new System.Drawing.Size(51, 20);
-            this.textBoxRateModeAccLim.TabIndex = 14;
-            // 
-            // textBoxRateModeRateLim
-            // 
-            this.textBoxRateModeRateLim.Location = new System.Drawing.Point(201, 58);
-            this.textBoxRateModeRateLim.Name = "textBoxRateModeRateLim";
-            this.textBoxRateModeRateLim.Size = new System.Drawing.Size(51, 20);
-            this.textBoxRateModeRateLim.TabIndex = 13;
-            // 
-            // textBoxPosModeAccLim
-            // 
-            this.textBoxPosModeAccLim.Location = new System.Drawing.Point(132, 80);
-            this.textBoxPosModeAccLim.Name = "textBoxPosModeAccLim";
-            this.textBoxPosModeAccLim.Size = new System.Drawing.Size(51, 20);
-            this.textBoxPosModeAccLim.TabIndex = 12;
-            // 
-            // textBoxPosModeRateLim
-            // 
-            this.textBoxPosModeRateLim.Location = new System.Drawing.Point(132, 58);
-            this.textBoxPosModeRateLim.Name = "textBoxPosModeRateLim";
-            this.textBoxPosModeRateLim.Size = new System.Drawing.Size(51, 20);
-            this.textBoxPosModeRateLim.TabIndex = 11;
-            // 
-            // textBoxPosLimHigh
-            // 
-            this.textBoxPosLimHigh.Location = new System.Drawing.Point(165, 31);
-            this.textBoxPosLimHigh.Name = "textBoxPosLimHigh";
-            this.textBoxPosLimHigh.Size = new System.Drawing.Size(44, 20);
-            this.textBoxPosLimHigh.TabIndex = 10;
-            // 
-            // textBoxSynModeAccLim
-            // 
-            this.textBoxSynModeAccLim.Location = new System.Drawing.Point(273, 80);
-            this.textBoxSynModeAccLim.Name = "textBoxSynModeAccLim";
-            this.textBoxSynModeAccLim.Size = new System.Drawing.Size(51, 20);
-            this.textBoxSynModeAccLim.TabIndex = 5;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(109, 65);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(17, 13);
-            this.label31.TabIndex = 2;
-            this.label31.Text = "P:";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(15, 34);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(76, 13);
-            this.label28.TabIndex = 2;
-            this.label28.Text = "Position Limits:";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(13, 80);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(93, 13);
-            this.label29.TabIndex = 8;
-            this.label29.Text = "Acceleration Limit:";
-            // 
-            // textBoxPosLimLow
-            // 
-            this.textBoxPosLimLow.Location = new System.Drawing.Point(112, 31);
-            this.textBoxPosLimLow.Name = "textBoxPosLimLow";
-            this.textBoxPosLimLow.Size = new System.Drawing.Size(41, 20);
-            this.textBoxPosLimLow.TabIndex = 3;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(13, 61);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(57, 13);
-            this.label30.TabIndex = 7;
-            this.label30.Text = "Rate Limit:";
-            // 
-            // textBoxSynModeRateLim
-            // 
-            this.textBoxSynModeRateLim.Location = new System.Drawing.Point(273, 58);
-            this.textBoxSynModeRateLim.Name = "textBoxSynModeRateLim";
-            this.textBoxSynModeRateLim.Size = new System.Drawing.Size(51, 20);
-            this.textBoxSynModeRateLim.TabIndex = 4;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label43);
@@ -516,7 +396,7 @@
             // 
             // ReturnLocalButton
             // 
-            this.ReturnLocalButton.Location = new System.Drawing.Point(630, 67);
+            this.ReturnLocalButton.Location = new System.Drawing.Point(640, 72);
             this.ReturnLocalButton.Name = "ReturnLocalButton";
             this.ReturnLocalButton.Size = new System.Drawing.Size(75, 41);
             this.ReturnLocalButton.TabIndex = 12;
@@ -940,7 +820,7 @@
             // 
             // RemoteMode
             // 
-            this.RemoteMode.Location = new System.Drawing.Point(731, 67);
+            this.RemoteMode.Location = new System.Drawing.Point(730, 72);
             this.RemoteMode.Name = "RemoteMode";
             this.RemoteMode.Size = new System.Drawing.Size(75, 41);
             this.RemoteMode.TabIndex = 16;
@@ -1108,53 +988,11 @@
             this.label21.TabIndex = 2;
             this.label21.Text = "Window 1: ";
             // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.label33);
-            this.panel6.Controls.Add(this.label27);
-            this.panel6.Controls.Add(this.label32);
-            this.panel6.Controls.Add(this.label28);
-            this.panel6.Controls.Add(this.textBoxRateModeAccLim);
-            this.panel6.Controls.Add(this.textBoxSynModeRateLim);
-            this.panel6.Controls.Add(this.textBoxRateModeRateLim);
-            this.panel6.Controls.Add(this.label30);
-            this.panel6.Controls.Add(this.textBoxPosModeAccLim);
-            this.panel6.Controls.Add(this.textBoxPosLimLow);
-            this.panel6.Controls.Add(this.textBoxPosModeRateLim);
-            this.panel6.Controls.Add(this.label29);
-            this.panel6.Controls.Add(this.textBoxPosLimHigh);
-            this.panel6.Controls.Add(this.label31);
-            this.panel6.Controls.Add(this.textBoxSynModeAccLim);
-            this.panel6.Location = new System.Drawing.Point(433, 628);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(272, 104);
-            this.panel6.TabIndex = 10;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(13, 8);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(160, 13);
-            this.label27.TabIndex = 9;
-            this.label27.Text = "Other Parameter Readings:";
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label49.Location = new System.Drawing.Point(389, 119);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(316, 13);
-            this.label49.TabIndex = 22;
-            this.label49.Text = "Set all Rate and Accel Limits under Pos, Rate, Accel, Abort Mode";
-            // 
             // button_interlock_open
             // 
-            this.button_interlock_open.Location = new System.Drawing.Point(839, 67);
+            this.button_interlock_open.Location = new System.Drawing.Point(894, 72);
             this.button_interlock_open.Name = "button_interlock_open";
-            this.button_interlock_open.Size = new System.Drawing.Size(75, 41);
+            this.button_interlock_open.Size = new System.Drawing.Size(70, 41);
             this.button_interlock_open.TabIndex = 23;
             this.button_interlock_open.Text = "Interlock Open";
             this.button_interlock_open.UseVisualStyleBackColor = true;
@@ -1162,9 +1000,9 @@
             // 
             // button_interlock_reset
             // 
-            this.button_interlock_reset.Location = new System.Drawing.Point(935, 67);
+            this.button_interlock_reset.Location = new System.Drawing.Point(979, 72);
             this.button_interlock_reset.Name = "button_interlock_reset";
-            this.button_interlock_reset.Size = new System.Drawing.Size(75, 41);
+            this.button_interlock_reset.Size = new System.Drawing.Size(59, 41);
             this.button_interlock_reset.TabIndex = 24;
             this.button_interlock_reset.Text = "Interlock Reset";
             this.button_interlock_reset.UseVisualStyleBackColor = true;
@@ -1198,6 +1036,8 @@
             chartArea1.AxisY.MajorGrid.Interval = 60D;
             chartArea1.AxisY.Maximum = 180D;
             chartArea1.AxisY.Minimum = -180D;
+            chartArea1.CursorX.IsUserEnabled = true;
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
             chartArea1.Name = "ChartArea1";
             this.pos_chart.ChartAreas.Add(chartArea1);
             this.pos_chart.Location = new System.Drawing.Point(48, 343);
@@ -1218,9 +1058,9 @@
             // 
             // button_interlock_close
             // 
-            this.button_interlock_close.Location = new System.Drawing.Point(839, 20);
+            this.button_interlock_close.Location = new System.Drawing.Point(815, 72);
             this.button_interlock_close.Name = "button_interlock_close";
-            this.button_interlock_close.Size = new System.Drawing.Size(75, 41);
+            this.button_interlock_close.Size = new System.Drawing.Size(68, 41);
             this.button_interlock_close.TabIndex = 28;
             this.button_interlock_close.Text = "Interlock Close";
             this.button_interlock_close.UseVisualStyleBackColor = true;
@@ -1426,6 +1266,75 @@
             this.label58.TabIndex = 9;
             this.label58.Text = "Sinusoidal Sequences: ";
             // 
+            // textBoxReadingDirectory
+            // 
+            this.textBoxReadingDirectory.Location = new System.Drawing.Point(18, 52);
+            this.textBoxReadingDirectory.Name = "textBoxReadingDirectory";
+            this.textBoxReadingDirectory.Size = new System.Drawing.Size(269, 20);
+            this.textBoxReadingDirectory.TabIndex = 3;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(15, 34);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(55, 13);
+            this.label28.TabIndex = 2;
+            this.label28.Text = "Directory: ";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(13, 8);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(171, 13);
+            this.label27.TabIndex = 9;
+            this.label27.Text = "Read Recorded Waveforms: ";
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.button_return_realtime);
+            this.panel6.Controls.Add(this.button_display_file);
+            this.panel6.Controls.Add(this.button_select_file);
+            this.panel6.Controls.Add(this.label27);
+            this.panel6.Controls.Add(this.label28);
+            this.panel6.Controls.Add(this.textBoxReadingDirectory);
+            this.panel6.Location = new System.Drawing.Point(406, 559);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(290, 144);
+            this.panel6.TabIndex = 10;
+            // 
+            // button_return_realtime
+            // 
+            this.button_return_realtime.Location = new System.Drawing.Point(187, 71);
+            this.button_return_realtime.Name = "button_return_realtime";
+            this.button_return_realtime.Size = new System.Drawing.Size(100, 23);
+            this.button_return_realtime.TabIndex = 47;
+            this.button_return_realtime.Text = "Return Real Time";
+            this.button_return_realtime.UseVisualStyleBackColor = true;
+            this.button_return_realtime.Click += new System.EventHandler(this.button_return_realtime_Click);
+            // 
+            // button_display_file
+            // 
+            this.button_display_file.Location = new System.Drawing.Point(64, 71);
+            this.button_display_file.Name = "button_display_file";
+            this.button_display_file.Size = new System.Drawing.Size(67, 23);
+            this.button_display_file.TabIndex = 46;
+            this.button_display_file.Text = "Display";
+            this.button_display_file.UseVisualStyleBackColor = true;
+            this.button_display_file.Click += new System.EventHandler(this.button_display_file_Click);
+            // 
+            // button_select_file
+            // 
+            this.button_select_file.Location = new System.Drawing.Point(210, 29);
+            this.button_select_file.Name = "button_select_file";
+            this.button_select_file.Size = new System.Drawing.Size(67, 23);
+            this.button_select_file.TabIndex = 45;
+            this.button_select_file.Text = "Select File";
+            this.button_select_file.UseVisualStyleBackColor = true;
+            this.button_select_file.Click += new System.EventHandler(this.button_select_file_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1438,7 +1347,6 @@
             this.Controls.Add(this.button_ECP);
             this.Controls.Add(this.button_interlock_reset);
             this.Controls.Add(this.button_interlock_open);
-            this.Controls.Add(this.label49);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.RemoteMode);
             this.Controls.Add(this.panel4);
@@ -1463,11 +1371,11 @@
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pos_chart)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1532,22 +1440,6 @@
         private System.Windows.Forms.ComboBox comboBox_window4;
         private System.Windows.Forms.ComboBox comboBox_window3;
         private System.Windows.Forms.ComboBox comboBox_window2;
-        private System.Windows.Forms.TextBox textBoxPosLimHigh;
-        private System.Windows.Forms.TextBox textBoxSynModeAccLim;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.TextBox textBoxPosLimLow;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.TextBox textBoxSynModeRateLim;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox textBoxRateModeAccLim;
-        private System.Windows.Forms.TextBox textBoxRateModeRateLim;
-        private System.Windows.Forms.TextBox textBoxPosModeAccLim;
-        private System.Windows.Forms.TextBox textBoxPosModeRateLim;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Button button_default_windows;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label34;
@@ -1567,7 +1459,6 @@
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Button button_interlock_open;
         private System.Windows.Forms.Button button_interlock_reset;
         private System.Windows.Forms.Button button_ECP;
@@ -1607,6 +1498,13 @@
         private System.Windows.Forms.TextBox textBoxSeqMag2;
         private System.Windows.Forms.TextBox textBoxSeqFreq2;
         private System.Windows.Forms.Timer ReturnZeroPosition;
+        private System.Windows.Forms.TextBox textBoxReadingDirectory;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button button_select_file;
+        private System.Windows.Forms.Button button_display_file;
+        private System.Windows.Forms.Button button_return_realtime;
 
     }
 }
