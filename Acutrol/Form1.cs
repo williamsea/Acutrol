@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NationalInstruments.VisaNS;
+using System.IO;
 
 namespace Acutrol
 {
@@ -19,7 +20,7 @@ namespace Acutrol
      * 
      * TODO: 
      * 1.debug ECP87 remote touch commend: not working correctly. But when using loc mode touch screen, it's working correct
-     * 2.text or sth else data store and review (display)
+     * 2.text or sth else data store and review (display), where is the eye coil feedback signal?
      * 3.setup abs limits (1140,1141) and ROT/LIN.
      */
 
@@ -32,6 +33,7 @@ namespace Acutrol
         //Open a generic Session first
         Session mySession = null;
 
+        //parameters for sinusoidal input
         double posReadValue = 1000;//used to check if position has been set back to zero position
         double cycleCounter = 0;//used for synthesis mode counting cycles
         //List<double> TargetCycleCount = new List<double>();
@@ -80,11 +82,18 @@ namespace Acutrol
         String AccelAbsoluteLimit = "1141";
         String RateTripLimit = "1146";
 
+        //display information
         double[] PosValArray = new double[100000]; //array used to store position values
         int disp = 0; //counter used for display data
         int counter = 0; //counter used to store data array
         int DispLength = 300; //30s
 
+        //parameters for document saving and reading
+        string savingPath = "C:\\Users\\VNEL\\Desktop\\Results";
+        string readingPath;
+        FileStream fileStream;
+        StreamWriter streamWriter;
+        Boolean RecordCtr = false;
 
         public Form1()
         {
@@ -239,7 +248,12 @@ namespace Acutrol
 
             responseString = ReadParameter(responseString, Position, textReadPos);
             posReadValue = Convert.ToDouble(responseString);
-            PosValArray[counter] = Convert.ToDouble(responseString);
+            //record position into txt file
+            if (RecordCtr == true)
+            {
+                streamWriter.Write(responseString + ' ');//write position string
+            }
+            PosValArray[counter] = posReadValue;
             
             responseString = ReadParameter(responseString, Rate, textReadRate);
             responseString = ReadParameter(responseString, Acceleration, textReadAcc);
@@ -260,6 +274,7 @@ namespace Acutrol
             //responseString = ReadOvarParameter(responseString, OvarRateModeAccLim, textBoxRateModeAccLim); 
         }
 
+        //display position in waveform format
         private void DisplayData()
         {
             this.pos_chart.Series["PosVal"].Points.Clear();
@@ -471,6 +486,7 @@ namespace Acutrol
         //    }
         //}
 
+        #region WindowDisplays
         private void comboBox_window1_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetupWindows("1", comboBox_window1);
@@ -601,6 +617,7 @@ namespace Acutrol
                 MessageBox.Show(exp.Message);
             }
         }
+        #endregion
 
         private void button_default_windows_Click(object sender, EventArgs e)
         {
@@ -708,6 +725,9 @@ namespace Acutrol
             TargetCycleCount[1] = Convert.ToDouble(textBoxSeqCycle2.Text);
             TargetCycleCount[2] = Convert.ToDouble(textBoxSeqCycle3.Text);
 
+            //open text writer
+            WriteIntoTxt();
+
             //Set all limitations
             SetAllLimits();
 
@@ -720,6 +740,18 @@ namespace Acutrol
             CheckZeroPosition.Enabled = true; //Once go back to zero, start sinusoidal cycles
 
             cycleCounter = 0;
+        }
+
+        private void WriteIntoTxt()
+        {
+            if (!Directory.Exists(savingPath))
+            {
+                Directory.CreateDirectory(savingPath);
+            }
+            string path = savingPath + "\\" + DateTime.Now.ToString("dd-MM-yyyy_hh-mm-ss") + ".txt";
+            fileStream = new FileStream(path, System.IO.FileMode.Create);
+            streamWriter = new StreamWriter(fileStream);
+            RecordCtr = true;//start recording position into txt
         }
 
         private void updateLimits(String newRateLimit, String newAccLimit){
@@ -798,6 +830,11 @@ namespace Acutrol
                 Interlock_Open();
                 CheckZeroPosition.Enabled = false;//no need to go back
                 ReturnZeroPosition.Enabled = false;
+
+                //stop position recording and dispose
+                RecordCtr = false;
+                streamWriter.Close();
+                fileStream.Close();
             }
         }
 
