@@ -20,8 +20,8 @@ namespace Acutrol
      * 
      * TODO: 
      * 1.debug ECP87 remote touch commend: not working correctly. But when using loc mode touch screen, it's working correct
-     * 2.text or sth else data store and review (display), where is the eye coil feedback signal?
-     * 3.setup abs limits (1140,1141) and ROT/LIN.
+     * 2.Get the eye coil feedback signal
+     * 3.Feeding system
      */
 
     public partial class Form1 : Form
